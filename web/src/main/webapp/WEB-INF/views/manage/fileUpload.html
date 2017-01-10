@@ -1,0 +1,203 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>后台管理</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="/resources/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="/resources/css/common.css" rel="stylesheet" type="text/css"/>
+
+    <link href="/resources/css/textillate/animate.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="panel_con main_con">
+    <div class="current_position">
+        <ol>
+            <li class="glyphicon glyphicon-folder-open icon_home"></li>
+            <li>当前位置：</li>
+            <li><a href="#">多媒体-读书</a>&gt;</li>
+            <li class="active">上传文件</li>
+        </ol>
+    </div>
+    <div class="panel panel-default main_contents">
+
+        <div class="panel-body search_list">
+            <form class="navbar-form navbar-left formValidate" style="width: 100%;">
+
+                <span>update更新where条件（可为空）：</span>
+                <div class="form-group">
+                    <input type="text" id="whereClause" class="form-control" name="whereClause"
+                           placeholder="whereClause">
+                </div>
+
+                <span>批量更新set条件（可为空）：</span>
+                <div class="form-group">
+                    <input type="text" id="setClause" class="form-control" name="setClause"
+                           placeholder="setClause">
+                </div>
+
+                <span>生成的model的包名：</span>
+                <div class="form-group">
+                    <input type="text" id="modelPackageName" class="form-control"
+                           name="modelPackageName" value="com.meizu.ebook.core.model"
+                           placeholder="modelPackageName" check-type="required">
+                </div>
+
+                <span>数据库表名分隔符：</span>
+                <div class="form-group">
+                    <input type="text" id="delimiters" class="form-control" name="delimiters"
+                           value="_"
+                           placeholder="delimiters" check-type="required">
+                </div>
+
+                <br>
+                <br>
+
+                <span>数据库字段前缀（MZ默认F）：</span>
+                <div class="form-group">
+                    <input type="text" id="prefix" class="form-control" name="prefix" value="F"
+                           placeholder="prefix" check-type="required">
+                </div>
+
+                <span>model的名字从数据库表名从最后第几个分隔符开始：</span>
+                <div class="form-group">
+                    <input type="text" id="index" class="form-control" name="index" value="1"
+                           placeholder="index" check-type="required positive_number">
+                </div>
+
+
+                <span>查询语句前缀（可为空）：</span>
+                <div class="form-group">
+                    <input type="text" id="selectAndCountPrefix" class="form-control"
+                           name="selectAndCountPrefix"
+                           placeholder="selectAndCountPrefix" value="conditions">
+                </div>
+
+                <span>更新语句前缀（可为空）：</span>
+                <div class="form-group">
+                    <input type="text" id="updatePrefix" class="form-control" name="updatePrefix"
+                           placeholder="updatePrefix" value="model">
+                </div>
+
+                <span>批量更新语句条件（填的是model的名字）：</span>
+                <div class="form-group" style="margin-top: 1%">
+                    <input type="text" id="updateBatchWhereClause" class="form-control" name="updateBatchWhereClause"
+                           placeholder="updateBatchWhereClause" value="id" check-type="required">
+                </div>
+
+                <!--<div class="form-group">-->
+                    <!--<input type="hidden" id="pathPrefix" class="form-control" name="pathPrefix"-->
+                           <!--placeholder="pathPrefix" check-type="required" value="/home/bae/"-->
+                           <!--disabled="disabled">-->
+                <!--</div>-->
+
+            </form>
+
+        </div>
+
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span
+                    aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <strong>特别注意：</strong>
+            如果生成失败，请重新点击选择按钮；请配置完成后再选择需要上传的sql文件；sql文件是建表语句，格式随便，但是每行只能有一个新建字段;修改配置后，请重新选择文件，请知悉！
+        </div>
+
+        <div class="alert alert-info alert-dismissible" role="alert" style="color: #86a921">
+            <button type="button" class="close" data-dismiss="alert"><span
+                    aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <strong>好消息：</strong>
+            目前支持的数据库字段类型有：tinyint,bigint,int,varchar,text,smallint,datetime,timestamp,double,float等等等等........
+        </div>
+
+        <div class="panel-body search_list">
+            <form class="navbar-form navbar-left" style="width: 100%;" role="search">
+                <div class="form-group drop_com">
+                    <input type="text" id="text" class="form-control" placeholder="请选择文件">
+
+                </div>
+                <div class="form-group drop_com">
+                    <button type="button" id="batchSearch"
+                            class="btn btn-primary J_search applic_btn">选择
+                    </button>
+                </div>
+
+                <br>
+                <div id="progress">
+                    <div class="bar"
+                         style="width: 100%; height: 3px; background: transparent;"></div>
+                </div>
+                <!--<div class="form-group drop_com">
+
+                </div>-->
+
+                <br/>
+                <br/>
+                <div class="form-group drop_com">
+                    <button type="button" id="beginSearch"
+                            class="btn btn-primary J_search applic_btn">开始生成
+                    </button>
+                </div>
+                <div class="form-group drop_com">
+                    <button type="button" id="download1"
+                            class="btn btn-primary J_search applic_btn" disabled="disabled">下载Model类
+                    </button>
+                </div>
+                <div class="form-group drop_com">
+                    <button type="button" id="download2"
+                            class="btn btn-primary J_search applic_btn" disabled="disabled">下载Param类
+                    </button>
+                </div>
+                <div class="form-group drop_com">
+                    <button type="button" id="download3"
+                            class="btn btn-primary J_search applic_btn" disabled="disabled">下载sql
+                    </button>
+                </div>
+
+            </form>
+
+            <div class="form-group drop_com">
+                <input type="file" id="fileInput" name="file" multiple
+                       class="form-control" style="display: none"/>
+            </div>
+        </div>
+
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <h5>
+                示例sql文件：<br>
+                CREATE TABLE `T_EBK_AUTHOR` (<br>
+                `FID` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '作者ID',<br>
+                `FNAME` varchar(64) NOT NULL DEFAULT '' COMMENT '作者名称',<br>
+                `FICON` varchar(256) NOT NULL DEFAULT '' COMMENT '作者头像地址',<br>
+                `FSUMMARY` varchar(1024) NOT NULL DEFAULT '' COMMENT '作者简介',<br>
+                `FUPDATE_TIME` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',<br>
+                `FCREATE_TIME` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',<br>
+                `FREVISE_NAME` varchar(64) NOT NULL DEFAULT '' COMMENT '修改后的名称',<br>
+                `FREVISE_SUMMARY` varchar(1024) NOT NULL DEFAULT '' COMMENT '修改后的简介',<br>
+                PRIMARY KEY (`FID`),<br>
+                UNIQUE KEY `UDX_NAME` (`FNAME`)<br>
+                ) ENGINE=InnoDB AUTO_INCREMENT=267308 DEFAULT CHARSET=utf8mb4 COMMENT='作者信息表'<br>
+            </h5>
+        </div>
+
+        <a href="javascript:void(0);" class="text_C col-num-2 tlt" title="钉玎：滕庆亚/qq:475804848">
+            <ul class="texts">
+                <li class="li1" data-in-effect="fadeInLeftBig" data-in-reverse="true" data-out-effect="hinge" data-out-shuffle="true">Contact Author</li>
+                <li class="li2"  data-in-effect="bounce" data-in-delay="30" data-out-effect="shake" data-out-shuffle="true" style="width: auto">钉：滕庆亚/qq:475804848</li>
+            </ul>
+        </a>
+    </div>
+</div>
+
+<script src="/resources/js/common/common.js"></script>
+<script src="/resources/js/common/bootstrap.js"></script>
+<script src="/resources/js/common/jquery-ui.js"></script>
+<script src="/resources/js/common/jquery.fileupload.js"></script>
+<script src="/resources/js/common/bootstrap3-validation.js"></script>
+<script src="/resources/js/common/jquery-asyncbox.js"></script>
+<script src="/resources/js/manage/fileUpload.js"></script>
+
+<script src="/resources/js/textillate/jquery.fittext.js"></script>
+<script src="/resources/js/textillate/jquery.lettering.js"></script>
+<script src="/resources/js/textillate/jquery.textillate.js"></script>
+
+</body>
+</html>

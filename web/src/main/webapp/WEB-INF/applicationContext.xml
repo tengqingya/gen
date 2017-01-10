@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:beans="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+    <context:component-scan base-package="com.meizu.tqy.action,com.meizu.tqy.filter,com.meizu.genbatis.service,com.meizu.genbatis.parser,com.meizu.genbatis.gen,com.meizu.tqy.handler"></context:component-scan>
+
+
+
+
+    <!-- 视图层配置 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--处理静态资源-->
+    <!--<bean id="urlFilter" class="com.meizu.tqy.filter.UrlFilter"></bean>-->
+    <mvc:resources mapping="*.html" location="/WEB-INF/views/"/>
+    <mvc:resources mapping="/favicon.ico" location="/"/>
+    <mvc:resources mapping="/manage/*.html" location="/WEB-INF/views/manage/"/>
+    <mvc:resources mapping="/resources/js/common/*.js" location="/resources/js/common/"/>
+    <mvc:resources mapping="/resources/js/plugin/*.js" location="/resources/js/plugin/"/>
+    <mvc:resources mapping="/resources/js/manage/*.js" location="/resources/js/manage/"/>
+    <mvc:annotation-driven/>
+
+    <!-- 注解映射的支持 返回json数据-->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <beans:bean id="fastJsonHttpMessageConverter" class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <beans:property name="features">
+                    <beans:array>
+                        <beans:bean id="QuoteFieldNames" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+                            <beans:property name="staticField" value="com.alibaba.fastjson.serializer.SerializerFeature.QuoteFieldNames"></beans:property>
+                        </beans:bean>
+                        <beans:bean id="WriteMapNullValue" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+                            <beans:property name="staticField" value="com.alibaba.fastjson.serializer.SerializerFeature.WriteMapNullValue"></beans:property>
+                        </beans:bean>
+                    </beans:array>
+                </beans:property>
+                <beans:property name="supportedMediaTypes">
+                    <beans:list>
+                        <beans:value>application/json</beans:value>
+                        <beans:value>text/json</beans:value>
+                    </beans:list>
+                </beans:property>
+            </beans:bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+    <mvc:default-servlet-handler />
+
+    <beans:bean id="localeResolver"	class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver" />
+
+    <!--配置文件 引入core包中的spring上下文配置-->
+    <import resource="classpath*:config/applicationContext.xml"></import>
+
+    <!--上传文件配置-->
+    <beans:bean id="multipartResolver"
+                class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <beans:property name="defaultEncoding" value="UTF-8" />
+        <beans:property name="maxUploadSize" value="30720000" />
+        <beans:property name="maxInMemorySize" value="10240" />
+    </beans:bean>
+
+</beans>

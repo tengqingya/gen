@@ -1,0 +1,28 @@
+@charset "utf-8";
+/*内容管理-作者管理*/
+.modify-author .titleTH {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    height: 40px;
+    background: #f5f5f5;
+}
+.tableDetail {
+    margin:20px 0 0 0;
+}
+.bookTable .bottom-bt {
+    padding: 10px 0;
+    text-align: center;
+}
+.bookTable .summary {
+    width: 95%;
+    margin: 10px;
+    background: #fff;
+    border: 1px solid #ddd;
+}
+.attendCount {
+    margin:0 0 0 10px;
+}
+.width-input {
+    width:300px;
+}
