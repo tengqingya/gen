@@ -14,6 +14,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class HtmlTemplate {
     private String name;
     private String content;
+    private String filePath;
+    private String fileName;
 //    private String laber;
 //    private String id;
 //    private String data_enum;
@@ -36,12 +38,29 @@ public class HtmlTemplate {
         this.content = content;
     }
 
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath( String filePath ) {
+        this.filePath = filePath;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName( String fileName ) {
+        this.fileName = fileName;
+    }
 
     @Override
     public String toString() {
         return "HtmlTemplate{" +
                 "name='" + name + '\'' +
                 ", content='" + content + '\'' +
+                ", filePath='" + filePath + '\'' +
+                ", fileName='" + fileName + '\'' +
                 '}';
     }
 }

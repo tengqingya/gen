@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <template>
     <name>dropdown</name>
+    <filePath>src/main/java/com/meizu/genbatis/tmp</filePath>
+    <fileName>${ClassName}.dropdown</fileName>
     <content>
         <![CDATA[
         <span>${laber}：</span>

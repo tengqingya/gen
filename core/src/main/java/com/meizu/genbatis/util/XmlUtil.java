@@ -4,14 +4,18 @@
 
 package com.meizu.genbatis.util;
 
+import com.meizu.genbatis.model.HtmlTemplate;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Map;
 
 /**
  * @author tengqingya
@@ -58,5 +62,40 @@ public class XmlUtil {
 //			logger.warn("error convert: {}", e.getMessage());
 //		}
         return null;
+    }
+
+
+    /**
+     * 生成到文件
+     * @param tpl
+     * @param model
+     * @param isReplaceFile
+     * @return
+     */
+    public static String generateToFile( HtmlTemplate tpl, Map<String, Object> model, boolean isReplaceFile){
+        // 获取生成文件
+        String fileName = StringUtils.replaceEach(FreeMarkers.renderString(tpl.getFilePath() + "/", model),
+                new String[]{"//", "/", "."}, new String[]{File.separator, File.separator, File.separator})
+                + FreeMarkers.renderString(tpl.getFileName(), model);
+        logger.debug(" fileName === " + fileName);
+
+        // 获取生成文件内容
+        String content = FreeMarkers.renderString(StringUtils.trimToEmpty(tpl.getContent()), model);
+        logger.debug(" content === \r\n" + content);
+
+        // 如果选择替换文件，则删除原文件
+        if (isReplaceFile){
+            FileUtils.deleteFile(fileName);
+        }
+
+        // 创建并写入文件
+        if (FileUtils.createFile(fileName)){
+            FileUtils.writeToFile(fileName, content, true);
+            logger.debug(" file create === " + fileName);
+            return "生成成功："+fileName+"<br/>";
+        }else{
+            logger.debug(" file extents === " + fileName);
+            return "文件已存在："+fileName+"<br/>";
+        }
     }
 }
