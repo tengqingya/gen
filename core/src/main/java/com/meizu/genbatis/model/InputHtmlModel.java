@@ -15,6 +15,8 @@ public class InputHtmlModel extends BaseHtmlModel {
 
     private String checkType;
 
+    private String requiredMessage;
+
     public String getPlaceholder() {
         return placeholder;
     }
@@ -39,12 +41,21 @@ public class InputHtmlModel extends BaseHtmlModel {
         this.checkType = checkType;
     }
 
+    public String getRequiredMessage() {
+        return requiredMessage;
+    }
+
+    public void setRequiredMessage( String requiredMessage ) {
+        this.requiredMessage = requiredMessage;
+    }
+
     @Override
     public String toString() {
         return "InputHtmlModel{" +
                 "placeholder='" + placeholder + '\'' +
                 ", needCheck=" + needCheck +
                 ", checkType='" + checkType + '\'' +
+                ", requiredMessage='" + requiredMessage + '\'' +
                 '}';
     }
 }

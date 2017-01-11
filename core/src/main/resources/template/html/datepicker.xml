@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017. tengqingya@meizu.com qq:475804848 dingding:taizhoujiangyan.
+  -->
+
+<template>
+    <name>dropdown</name>
+    <filePath>src/main/java/com/meizu/genbatis/tmp</filePath>
+    <fileName>${ClassName}.datepicker</fileName>
+    <content>
+        <![CDATA[
+         <span class="s1 change-span">${spanName1}：</span>
+                <div class="form-group margin-bottom" style="padding-top: 1%">
+                    <input type="text" class="form-control ${startTime}" id="${startTime}" value name="${startTime}"
+                           placeholder="${placeholder1}" <#if needCheck == true>check-type="${checkType}" required-message="${requiredMessage1}"</#if> >
+                </div>
+
+         <span class="s1 change-span">${spanName2}：</span>
+                <div class="form-group margin-bottom" style="padding-top: 1%">
+                    <input type="text" class="form-control ${endTime}" id="${endTime}" value name="${endTime}"
+                           placeholder="${placeholder2}" <#if needCheck == true>check-type="${checkType}" required-message="${requiredMessage2}"</#if> >
+                </div>
+        ]]>
+    </content>
+</template>

@@ -7,6 +7,7 @@ package com.meizu.genbatis.debug;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.meizu.genbatis.gen.GenerateBean;
+import com.meizu.genbatis.model.DatepickerHtmlModel;
 import com.meizu.genbatis.model.DropDownHtmlModel;
 import com.meizu.genbatis.model.HtmlTemplate;
 import com.meizu.genbatis.model.InputHtmlModel;
@@ -27,7 +28,7 @@ public class debug {
         ApplicationContext x = new ClassPathXmlApplicationContext( new String[] {
                 "classpath*:config/applicationContext.xml"
         } );
-        testinputGen();
+        testDatepickerGen();
     }
 
     private static void testDropDownGen() {
@@ -66,8 +67,36 @@ public class debug {
         inputHtmlModel.setPlaceholder("请输入您的姓名哦");
         inputHtmlModel.setNeedCheck(true);
         inputHtmlModel.setCheckType("required date");
+        inputHtmlModel.setRequiredMessage("please!!!");
 
         String s = FreeMarkers.renderString(template.getContent(), JSON.parseObject(JSON.toJSONString(inputHtmlModel)));
+
+        System.out.println(template.toString());
+        System.out.println(s);
+    }
+
+    private static void testDatepickerGen() {
+        String fileName = "/template/html/datepicker.xml";
+        HtmlTemplate template = XmlUtil.fileToObject(fileName, HtmlTemplate.class);
+
+        DatepickerHtmlModel datepickerHtmlModel =new DatepickerHtmlModel();
+        datepickerHtmlModel.setPlaceholder1("开始时间");
+        datepickerHtmlModel.setPlaceholder2("结束时间");
+        datepickerHtmlModel.setNeedCheck(false);
+        datepickerHtmlModel.setCheckType("required date");
+        datepickerHtmlModel.setRequiredMessage1("请选择开始时间");
+        datepickerHtmlModel.setRequiredMessage2("请选择结束时间");
+        datepickerHtmlModel.setSpanName1("评论开始时间");
+        datepickerHtmlModel.setSpanName2("评论结束时间");
+        datepickerHtmlModel.setStartTime("startTime");
+        datepickerHtmlModel.setEndTime("endTime");
+        datepickerHtmlModel.setFileName("");
+        datepickerHtmlModel.setId("");
+        datepickerHtmlModel.setName("");
+        datepickerHtmlModel.setSpanName("");
+
+
+        String s = FreeMarkers.renderString(template.getContent(), JSON.parseObject(JSON.toJSONString(datepickerHtmlModel)));
 
         System.out.println(template.toString());
         System.out.println(s);

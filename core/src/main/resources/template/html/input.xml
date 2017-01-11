@@ -11,7 +11,7 @@
         <![CDATA[
         <span>${spanName}：</span>
                 <div class="form-group">
-                    <input type="text" id="${id}" class="form-control" name="${id}" <#if needCheck == true>check-type="${checkType}"</#if>
+                    <input type="text" id="${id}" class="form-control" name="${id}" <#if needCheck == true>check-type="${checkType}" required-message="${requiredMessage}"</#if>
                            placeholder="${placeholder}">
                 </div>
         ]]>
