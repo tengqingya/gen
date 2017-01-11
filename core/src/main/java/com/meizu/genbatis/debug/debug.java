@@ -8,6 +8,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.meizu.genbatis.gen.GenerateBean;
 import com.meizu.genbatis.model.ButtonHtmlModel;
+import com.meizu.genbatis.model.CheckboxChildBean;
+import com.meizu.genbatis.model.CheckboxHtmlBean;
 import com.meizu.genbatis.model.DatepickerHtmlModel;
 import com.meizu.genbatis.model.DropDownHtmlModel;
 import com.meizu.genbatis.model.HtmlTemplate;
@@ -34,7 +36,7 @@ public class debug {
         ApplicationContext x = new ClassPathXmlApplicationContext( new String[] {
                 "classpath*:config/applicationContext.xml"
         } );
-        testModalGen();
+        testCheckBoxGen();
     }
 
     private static void testDropDownGen() {
@@ -153,6 +155,29 @@ public class debug {
         modalhtmlModel.setContent("解禁/禁言");
         modalhtmlModel.setId("myModal");
         String s = FreeMarkers.renderString(template.getContent(), JSON.parseObject(JSON.toJSONString(modalhtmlModel)));
+
+        System.out.println(template.toString());
+        System.out.println(s);
+    }
+
+    private static void testCheckBoxGen() {
+        String fileName = "/template/html/checkbox.xml";
+        HtmlTemplate template = XmlUtil.fileToObject(fileName, HtmlTemplate.class);
+
+        CheckboxHtmlBean checkboxHtmlBean = new CheckboxHtmlBean();
+        CheckboxChildBean checkboxChildBean =new CheckboxChildBean();
+        List<CheckboxChildBean> checkboxChildBeanList = new ArrayList<>();
+        checkboxChildBean.setId("forbid_user");
+        checkboxChildBean.setContent("帐号");
+        checkboxChildBeanList.add(checkboxChildBean);
+        checkboxChildBean =new CheckboxChildBean();
+        checkboxChildBean.setId("forbid_device");
+        checkboxChildBean.setContent("设备");
+        checkboxChildBeanList.add(checkboxChildBean);
+
+        checkboxHtmlBean.setCheckboxList(checkboxChildBeanList);
+
+        String s = FreeMarkers.renderString(template.getContent(), JSON.parseObject(JSON.toJSONString(checkboxHtmlBean)));
 
         System.out.println(template.toString());
         System.out.println(s);

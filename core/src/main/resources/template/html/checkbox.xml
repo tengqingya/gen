@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017. tengqingya@meizu.com qq:475804848 dingding:taizhoujiangyan.
+  -->
+
+<template>
+    <name>checkbox</name>
+    <filePath>src/main/java/com/meizu/genbatis/tmp</filePath>
+    <fileName>${ClassName}.checkbox</fileName>
+    <content>
+        <![CDATA[
+            <div id="checkbox-div">
+                <#list checkboxList as l>
+                <input type="checkbox" name="${l.id}" class="checkbox" id="${l.id}" <#if l_index==0>checked="checked"</#if>/><lable for="${l.id}">${l.content}</lable><br/>
+                </#list>
+            </div>
+        ]]>
+    </content>
+</template>
