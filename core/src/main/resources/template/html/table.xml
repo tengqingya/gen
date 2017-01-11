@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017. tengqingya@meizu.com qq:475804848 dingding:taizhoujiangyan.
+
+  Note:
+When you want to test if x > 0 or x >= 0, writing <#if x > 0> and <#if x >= 0> is WRONG, as the first > will close the #if tag. To work that around, write <#if x gt 0> or <#if gte 0>. Also note that if the comparison occurs inside parentheses, you will have no such problem, like <#if foo.bar(x > 0)> works as expected.
+  -->
+
+<template>
+    <name>button</name>
+    <filePath>src/main/java/com/meizu/genbatis/tmp</filePath>
+    <fileName>${ClassName}.table</fileName>
+    <content>
+        <![CDATA[
+         <table id="example" class="display dataTable no-footer" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                <#list tableList as l>
+                <th<#if l.width gt 0> style="width: ${l.width}%"</#if>>${l.content}</th>
+                </#list>
+                </tr>
+                </thead>
+                <tbody id="${id}"></tbody>
+            </table>
+        ]]>
+    </content>
+</template>

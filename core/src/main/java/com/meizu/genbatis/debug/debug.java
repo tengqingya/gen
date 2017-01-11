@@ -12,12 +12,16 @@ import com.meizu.genbatis.model.DatepickerHtmlModel;
 import com.meizu.genbatis.model.DropDownHtmlModel;
 import com.meizu.genbatis.model.HtmlTemplate;
 import com.meizu.genbatis.model.InputHtmlModel;
+import com.meizu.genbatis.model.TableHtmlModel;
+import com.meizu.genbatis.model.TableThBean;
 import com.meizu.genbatis.util.FreeMarkers;
 import com.meizu.genbatis.util.XmlUtil;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,7 +33,7 @@ public class debug {
         ApplicationContext x = new ClassPathXmlApplicationContext( new String[] {
                 "classpath*:config/applicationContext.xml"
         } );
-        testbuttonGen();
+        testtableGen();
     }
 
     private static void testDropDownGen() {
@@ -112,6 +116,29 @@ public class debug {
         buttonHtmlModel.setAction("J_search");
 
         String s = FreeMarkers.renderString(template.getContent(), JSON.parseObject(JSON.toJSONString(buttonHtmlModel)));
+
+        System.out.println(template.toString());
+        System.out.println(s);
+    }
+
+    private static void testtableGen() {
+        String fileName = "/template/html/table.xml";
+        HtmlTemplate template = XmlUtil.fileToObject(fileName, HtmlTemplate.class);
+
+        TableHtmlModel tableHtmlModel = new TableHtmlModel();
+        tableHtmlModel.setId("table");
+        List<TableThBean> tableThBeanList = new ArrayList<>();
+        TableThBean tableThBean = new TableThBean();
+        tableThBean.setWidth(4);
+        tableThBean.setContent("书评ID");
+        tableThBeanList.add(tableThBean);
+        tableThBean = new TableThBean();
+        tableThBean.setWidth(0);
+        tableThBean.setContent("发表时间");
+        tableThBeanList.add(tableThBean);
+        tableHtmlModel.setTableList(tableThBeanList);
+
+        String s = FreeMarkers.renderString(template.getContent(), JSON.parseObject(JSON.toJSONString(tableHtmlModel)));
 
         System.out.println(template.toString());
         System.out.println(s);
