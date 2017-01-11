@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017. tengqingya@meizu.com qq:475804848 dingding:taizhoujiangyan.
+  -->
+
+<template>
+    <name>button</name>
+    <filePath>src/main/java/com/meizu/genbatis/tmp</filePath>
+    <fileName>${ClassName}.button</fileName>
+    <content>
+        <![CDATA[
+         <div class="col-width" style="float: right;margin-top: 10px">
+                <button class="btn btn-primary applic_btn ${action}">${content}
+                </button>
+         </div>
+        ]]>
+    </content>
+</template>

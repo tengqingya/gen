@@ -17,6 +17,7 @@ public class BaseHtmlModel {
     private String id;
     private String name;
     private String spanName;
+    private String content;
 
     public String getFileName() {
         return fileName;
@@ -50,6 +51,14 @@ public class BaseHtmlModel {
         this.spanName = spanName;
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent( String content ) {
+        this.content = content;
+    }
+
     @Override
     public String toString() {
         return "BaseHtmlModel{" +
@@ -57,6 +66,7 @@ public class BaseHtmlModel {
                 ", id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", spanName='" + spanName + '\'' +
+                ", content='" + content + '\'' +
                 '}';
     }
 }

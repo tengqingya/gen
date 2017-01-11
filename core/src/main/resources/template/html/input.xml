@@ -4,7 +4,7 @@
   -->
 
 <template>
-    <name>dropdown</name>
+    <name>input</name>
     <filePath>src/main/java/com/meizu/genbatis/tmp</filePath>
     <fileName>${ClassName}.input</fileName>
     <content>

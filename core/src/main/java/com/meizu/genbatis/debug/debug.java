@@ -7,6 +7,7 @@ package com.meizu.genbatis.debug;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.meizu.genbatis.gen.GenerateBean;
+import com.meizu.genbatis.model.ButtonHtmlModel;
 import com.meizu.genbatis.model.DatepickerHtmlModel;
 import com.meizu.genbatis.model.DropDownHtmlModel;
 import com.meizu.genbatis.model.HtmlTemplate;
@@ -28,7 +29,7 @@ public class debug {
         ApplicationContext x = new ClassPathXmlApplicationContext( new String[] {
                 "classpath*:config/applicationContext.xml"
         } );
-        testDatepickerGen();
+        testbuttonGen();
     }
 
     private static void testDropDownGen() {
@@ -97,6 +98,20 @@ public class debug {
 
 
         String s = FreeMarkers.renderString(template.getContent(), JSON.parseObject(JSON.toJSONString(datepickerHtmlModel)));
+
+        System.out.println(template.toString());
+        System.out.println(s);
+    }
+
+    private static void testbuttonGen() {
+        String fileName = "/template/html/button.xml";
+        HtmlTemplate template = XmlUtil.fileToObject(fileName, HtmlTemplate.class);
+
+        ButtonHtmlModel buttonHtmlModel = new ButtonHtmlModel();
+        buttonHtmlModel.setContent("查询");
+        buttonHtmlModel.setAction("J_search");
+
+        String s = FreeMarkers.renderString(template.getContent(), JSON.parseObject(JSON.toJSONString(buttonHtmlModel)));
 
         System.out.println(template.toString());
         System.out.println(s);
