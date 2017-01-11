@@ -4,7 +4,10 @@
 
 package com.meizu.genbatis.debug;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.meizu.genbatis.gen.GenerateBean;
+import com.meizu.genbatis.model.DropDownHtmlModel;
 import com.meizu.genbatis.model.HtmlTemplate;
 import com.meizu.genbatis.util.FreeMarkers;
 import com.meizu.genbatis.util.XmlUtil;
@@ -26,15 +29,23 @@ public class debug {
         String fileName = "/template/html/dropdown.xml";
         HtmlTemplate template = XmlUtil.fileToObject(fileName, HtmlTemplate.class);
 
-        Map<String, Object> model = new HashMap<>();
-        model.put("ClassName","test");
-        model.put("laber","性别");
-        model.put("id","sex");
-        model.put("data_enum","SEX");
-        model.put("data_sel_all","true");
-        model.put("data_result_in","value");
+//        JSONObject jsonObject =  new JSONObject();
+//        jsonObject.put("ClassName","test");
+//        jsonObject.put("spanName","性别");
+//        jsonObject.put("id","sex");
+//        jsonObject.put("data_enum","SEX");
+//        jsonObject.put("data_sel_all","true");
+//        jsonObject.put("data_result_in","value");
+        DropDownHtmlModel dropDownHtmlModel =new DropDownHtmlModel();
+        dropDownHtmlModel.setData_enum("SEX");
+        dropDownHtmlModel.setData_sel_all("true");
+        dropDownHtmlModel.setData_result_in("value");
+        dropDownHtmlModel.setFileName("/template/html/dropdown.xml");
+        dropDownHtmlModel.setId("sex");
+        dropDownHtmlModel.setName("sex");
+        dropDownHtmlModel.setSpanName("性别");
 
-        String s = FreeMarkers.renderString(template.getContent(), model);
+        String s = FreeMarkers.renderString(template.getContent(), JSON.parseObject(JSON.toJSONString(dropDownHtmlModel)));
 
         System.out.println(template.toString());
         System.out.println(s);

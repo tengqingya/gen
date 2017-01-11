@@ -16,11 +16,6 @@ public class HtmlTemplate {
     private String content;
     private String filePath;
     private String fileName;
-//    private String laber;
-//    private String id;
-//    private String data_enum;
-//    private String data_sel_all;
-//    private String data_result_in;
 
     public String getName() {
         return name;
