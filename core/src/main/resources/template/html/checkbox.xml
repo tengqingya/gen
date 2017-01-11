@@ -9,9 +9,9 @@
     <fileName>${ClassName}.checkbox</fileName>
     <content>
         <![CDATA[
-            <div id="checkbox-div">
+            <div id="${type}-div">
                 <#list checkboxList as l>
-                <input type="checkbox" name="${l.id}" class="checkbox" id="${l.id}" <#if l_index==0>checked="checked"</#if>/><lable for="${l.id}">${l.content}</lable><br/>
+                <input type="${type}" name="${l.id}" class="${type}" value="${l.value}" id="${l.id}" <#if l_index==0>checked="checked"</#if>/><lable for="${l.id}">${l.content}</lable><br/>
                 </#list>
             </div>
         ]]>

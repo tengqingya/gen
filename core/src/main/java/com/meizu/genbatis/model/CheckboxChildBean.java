@@ -11,6 +11,7 @@ package com.meizu.genbatis.model;
 public class CheckboxChildBean {
     private String id;
     private String content;
+    private String value;
 
     public String getId() {
         return id;
@@ -28,11 +29,20 @@ public class CheckboxChildBean {
         this.content = content;
     }
 
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue( String value ) {
+        this.value = value;
+    }
+
     @Override
     public String toString() {
         return "CheckboxChildBean{" +
                 "id='" + id + '\'' +
                 ", content='" + content + '\'' +
+                ", value='" + value + '\'' +
                 '}';
     }
 }

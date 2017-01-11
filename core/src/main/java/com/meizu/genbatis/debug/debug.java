@@ -5,11 +5,9 @@
 package com.meizu.genbatis.debug;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.meizu.genbatis.gen.GenerateBean;
 import com.meizu.genbatis.model.ButtonHtmlModel;
+import com.meizu.genbatis.model.CheckboxAndRadioHtmlBean;
 import com.meizu.genbatis.model.CheckboxChildBean;
-import com.meizu.genbatis.model.CheckboxHtmlBean;
 import com.meizu.genbatis.model.DatepickerHtmlModel;
 import com.meizu.genbatis.model.DropDownHtmlModel;
 import com.meizu.genbatis.model.HtmlTemplate;
@@ -23,9 +21,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author tengqingya
@@ -164,20 +160,23 @@ public class debug {
         String fileName = "/template/html/checkbox.xml";
         HtmlTemplate template = XmlUtil.fileToObject(fileName, HtmlTemplate.class);
 
-        CheckboxHtmlBean checkboxHtmlBean = new CheckboxHtmlBean();
+        CheckboxAndRadioHtmlBean checkboxAndRadioHtmlBean = new CheckboxAndRadioHtmlBean();
         CheckboxChildBean checkboxChildBean =new CheckboxChildBean();
         List<CheckboxChildBean> checkboxChildBeanList = new ArrayList<>();
-        checkboxChildBean.setId("forbid_user");
-        checkboxChildBean.setContent("帐号");
+        checkboxChildBean.setId("forbid_forever");
+        checkboxChildBean.setContent("永久禁言");
+        checkboxChildBean.setValue("1");
         checkboxChildBeanList.add(checkboxChildBean);
         checkboxChildBean =new CheckboxChildBean();
-        checkboxChildBean.setId("forbid_device");
-        checkboxChildBean.setContent("设备");
+        checkboxChildBean.setId("forbid_day");
+        checkboxChildBean.setContent("禁言天数");
+        checkboxChildBean.setValue("2");
         checkboxChildBeanList.add(checkboxChildBean);
 
-        checkboxHtmlBean.setCheckboxList(checkboxChildBeanList);
+        checkboxAndRadioHtmlBean.setCheckboxList(checkboxChildBeanList);
+        checkboxAndRadioHtmlBean.setType("radio");
 
-        String s = FreeMarkers.renderString(template.getContent(), JSON.parseObject(JSON.toJSONString(checkboxHtmlBean)));
+        String s = FreeMarkers.renderString(template.getContent(), JSON.parseObject(JSON.toJSONString(checkboxAndRadioHtmlBean)));
 
         System.out.println(template.toString());
         System.out.println(s);
