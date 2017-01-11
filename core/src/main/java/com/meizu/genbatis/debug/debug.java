@@ -12,6 +12,7 @@ import com.meizu.genbatis.model.DatepickerHtmlModel;
 import com.meizu.genbatis.model.DropDownHtmlModel;
 import com.meizu.genbatis.model.HtmlTemplate;
 import com.meizu.genbatis.model.InputHtmlModel;
+import com.meizu.genbatis.model.ModalhtmlModel;
 import com.meizu.genbatis.model.TableHtmlModel;
 import com.meizu.genbatis.model.TableThBean;
 import com.meizu.genbatis.util.FreeMarkers;
@@ -33,7 +34,7 @@ public class debug {
         ApplicationContext x = new ClassPathXmlApplicationContext( new String[] {
                 "classpath*:config/applicationContext.xml"
         } );
-        testtableGen();
+        testModalGen();
     }
 
     private static void testDropDownGen() {
@@ -139,6 +140,19 @@ public class debug {
         tableHtmlModel.setTableList(tableThBeanList);
 
         String s = FreeMarkers.renderString(template.getContent(), JSON.parseObject(JSON.toJSONString(tableHtmlModel)));
+
+        System.out.println(template.toString());
+        System.out.println(s);
+    }
+
+    private static void testModalGen() {
+        String fileName = "/template/html/modal.xml";
+        HtmlTemplate template = XmlUtil.fileToObject(fileName, HtmlTemplate.class);
+
+        ModalhtmlModel modalhtmlModel = new ModalhtmlModel();
+        modalhtmlModel.setContent("解禁/禁言");
+        modalhtmlModel.setId("myModal");
+        String s = FreeMarkers.renderString(template.getContent(), JSON.parseObject(JSON.toJSONString(modalhtmlModel)));
 
         System.out.println(template.toString());
         System.out.println(s);

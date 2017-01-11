@@ -7,7 +7,7 @@ When you want to test if x > 0 or x >= 0, writing <#if x > 0> and <#if x >= 0> i
   -->
 
 <template>
-    <name>button</name>
+    <name>table</name>
     <filePath>src/main/java/com/meizu/genbatis/tmp</filePath>
     <fileName>${ClassName}.table</fileName>
     <content>
