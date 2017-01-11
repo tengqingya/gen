@@ -19,6 +19,26 @@ public class BaseHtmlModel {
     private String spanName;
     private String content;
 
+    private Boolean needCheck;
+    private String checkType;
+    private String requiredMessage;
+
+    public Boolean getNeedCheck() {
+        return needCheck;
+    }
+
+    public void setNeedCheck( Boolean needCheck ) {
+        this.needCheck = needCheck;
+    }
+
+    public String getCheckType() {
+        return checkType;
+    }
+
+    public void setCheckType( String checkType ) {
+        this.checkType = checkType;
+    }
+
     public String getFileName() {
         return fileName;
     }
@@ -59,6 +79,14 @@ public class BaseHtmlModel {
         this.content = content;
     }
 
+    public String getRequiredMessage() {
+        return requiredMessage;
+    }
+
+    public void setRequiredMessage( String requiredMessage ) {
+        this.requiredMessage = requiredMessage;
+    }
+
     @Override
     public String toString() {
         return "BaseHtmlModel{" +
@@ -67,6 +95,9 @@ public class BaseHtmlModel {
                 ", name='" + name + '\'' +
                 ", spanName='" + spanName + '\'' +
                 ", content='" + content + '\'' +
+                ", needCheck=" + needCheck +
+                ", checkType='" + checkType + '\'' +
+                ", requiredMessage='" + requiredMessage + '\'' +
                 '}';
     }
 }

@@ -32,7 +32,13 @@ public class debug {
         ApplicationContext x = new ClassPathXmlApplicationContext( new String[] {
                 "classpath*:config/applicationContext.xml"
         } );
+        testDropDownGen();
+        testtableGen();
         testCheckBoxGen();
+        testModalGen();
+        testbuttonGen();
+        testDatepickerGen();
+        testinputGen();
     }
 
     private static void testDropDownGen() {
@@ -47,13 +53,16 @@ public class debug {
 //        jsonObject.put("data_sel_all","true");
 //        jsonObject.put("data_result_in","value");
         DropDownHtmlModel dropDownHtmlModel =new DropDownHtmlModel();
-        dropDownHtmlModel.setData_enum("SEX");
+        dropDownHtmlModel.setData_enum("activityType");
         dropDownHtmlModel.setData_sel_all("true");
         dropDownHtmlModel.setData_result_in("value");
         dropDownHtmlModel.setFileName("/template/html/dropdown.xml");
-        dropDownHtmlModel.setId("sex");
-        dropDownHtmlModel.setName("sex");
-        dropDownHtmlModel.setSpanName("性别");
+        dropDownHtmlModel.setId("goodstype2");
+        dropDownHtmlModel.setName("goodstype2");
+        dropDownHtmlModel.setSpanName("xlk3");
+        dropDownHtmlModel.setNeedCheck(true);
+        dropDownHtmlModel.setCheckType("checked number");
+        dropDownHtmlModel.setRequiredMessage("need check");
 
         String s = FreeMarkers.renderString(template.getContent(), JSON.parseObject(JSON.toJSONString(dropDownHtmlModel)));
 
@@ -69,7 +78,7 @@ public class debug {
         inputHtmlModel.setSpanName("姓名");
         inputHtmlModel.setId("myName");
         inputHtmlModel.setPlaceholder("请输入您的姓名哦");
-        inputHtmlModel.setNeedCheck(true);
+        inputHtmlModel.setNeedCheck(false);
         inputHtmlModel.setCheckType("required date");
         inputHtmlModel.setRequiredMessage("please!!!");
 

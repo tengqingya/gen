@@ -12,10 +12,6 @@ public class DatepickerHtmlModel extends BaseHtmlModel {
     private String placeholder1;
     private String placeholder2;
 
-    private Boolean needCheck;
-
-    private String checkType;
-
     private String requiredMessage1;
     private String requiredMessage2;
 
@@ -39,22 +35,6 @@ public class DatepickerHtmlModel extends BaseHtmlModel {
 
     public void setPlaceholder2( String placeholder2 ) {
         this.placeholder2 = placeholder2;
-    }
-
-    public Boolean getNeedCheck() {
-        return needCheck;
-    }
-
-    public void setNeedCheck( Boolean needCheck ) {
-        this.needCheck = needCheck;
-    }
-
-    public String getCheckType() {
-        return checkType;
-    }
-
-    public void setCheckType( String checkType ) {
-        this.checkType = checkType;
     }
 
     public String getRequiredMessage1() {
@@ -111,8 +91,6 @@ public class DatepickerHtmlModel extends BaseHtmlModel {
         return "DatepickerHtmlModel{" +
                 "placeholder1='" + placeholder1 + '\'' +
                 ", placeholder2='" + placeholder2 + '\'' +
-                ", needCheck=" + needCheck +
-                ", checkType='" + checkType + '\'' +
                 ", requiredMessage1='" + requiredMessage1 + '\'' +
                 ", requiredMessage2='" + requiredMessage2 + '\'' +
                 ", spanName1='" + spanName1 + '\'' +
