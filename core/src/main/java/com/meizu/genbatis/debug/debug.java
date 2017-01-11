@@ -9,6 +9,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.meizu.genbatis.gen.GenerateBean;
 import com.meizu.genbatis.model.DropDownHtmlModel;
 import com.meizu.genbatis.model.HtmlTemplate;
+import com.meizu.genbatis.model.InputHtmlModel;
 import com.meizu.genbatis.util.FreeMarkers;
 import com.meizu.genbatis.util.XmlUtil;
 import org.springframework.context.ApplicationContext;
@@ -26,6 +27,10 @@ public class debug {
         ApplicationContext x = new ClassPathXmlApplicationContext( new String[] {
                 "classpath*:config/applicationContext.xml"
         } );
+        testinputGen();
+    }
+
+    private static void testDropDownGen() {
         String fileName = "/template/html/dropdown.xml";
         HtmlTemplate template = XmlUtil.fileToObject(fileName, HtmlTemplate.class);
 
@@ -46,6 +51,23 @@ public class debug {
         dropDownHtmlModel.setSpanName("性别");
 
         String s = FreeMarkers.renderString(template.getContent(), JSON.parseObject(JSON.toJSONString(dropDownHtmlModel)));
+
+        System.out.println(template.toString());
+        System.out.println(s);
+    }
+
+    private static void testinputGen() {
+        String fileName = "/template/html/input.xml";
+        HtmlTemplate template = XmlUtil.fileToObject(fileName, HtmlTemplate.class);
+
+        InputHtmlModel inputHtmlModel = new InputHtmlModel();
+        inputHtmlModel.setSpanName("姓名");
+        inputHtmlModel.setId("myName");
+        inputHtmlModel.setPlaceholder("请输入您的姓名哦");
+        inputHtmlModel.setNeedCheck(true);
+        inputHtmlModel.setCheckType("required date");
+
+        String s = FreeMarkers.renderString(template.getContent(), JSON.parseObject(JSON.toJSONString(inputHtmlModel)));
 
         System.out.println(template.toString());
         System.out.println(s);

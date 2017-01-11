@@ -13,7 +13,7 @@
                                 id="param_${id}" value="-1">全部</i></button>
                         <button type="button"
                                 class="btn btn-default dropdown-toggle  btn-default-disable type_list"
-                                data-toggle="dropdown" disabled="disabled">
+                                data-toggle="dropdown">
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>

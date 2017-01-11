@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017. tengqingya@meizu.com qq:475804848 dingding:taizhoujiangyan.
+  -->
+
+<template>
+    <name>dropdown</name>
+    <filePath>src/main/java/com/meizu/genbatis/tmp</filePath>
+    <fileName>${ClassName}.input</fileName>
+    <content>
+        <![CDATA[
+        <span>${spanName}：</span>
+                <div class="form-group">
+                    <input type="text" id="${id}" class="form-control" name="${id}" <#if needCheck == true>check-type="${checkType}"</#if>
+                           placeholder="${placeholder}">
+                </div>
+        ]]>
+    </content>
+</template>
