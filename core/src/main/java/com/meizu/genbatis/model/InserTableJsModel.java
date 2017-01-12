@@ -5,19 +5,20 @@
 package com.meizu.genbatis.model;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author tengqingya
  * @create 2017-01-12 14:46
  */
 public class InserTableJsModel extends BaseJsModel {
-    private List<String> columnNames;
+    private Map<String,String> columnNames;
 
-    public List<String> getColumnNames() {
+    public Map<String, String> getColumnNames() {
         return columnNames;
     }
 
-    public void setColumnNames( List<String> columnNames ) {
+    public void setColumnNames( Map<String, String> columnNames ) {
         this.columnNames = columnNames;
     }
 }

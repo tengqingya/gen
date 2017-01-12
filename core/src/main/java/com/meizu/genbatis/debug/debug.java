@@ -23,8 +23,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
+import java.util.TreeMap;
 
 /**
  * @author tengqingya
@@ -214,15 +217,17 @@ public class debug {
 
         InserTableJsModel inserTableJsModel =new InserTableJsModel();
         inserTableJsModel.setJsName("commentManage");
-        List<String> stringList = new ArrayList<>();
-        stringList.add("flyme");
-        stringList.add("isTop");
-        stringList.add("sort");
+        Map<String,String> stringList = new HashMap<>();
+        stringList.put("a","false");
+        stringList.put("b","true");
+        stringList.put("c","false");
+        stringList.put("d","false");
+        stringList.put("e","false");
         inserTableJsModel.setColumnNames(stringList);
 
         String s = FreeMarkers.renderString(template.getContent(), JSON.parseObject(JSON.toJSONString(inserTableJsModel)));
 
-        System.out.println(template.toString());
+//        System.out.println(template.toString());
         System.out.println(s);
     }
 }
