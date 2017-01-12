@@ -13,6 +13,7 @@ import com.meizu.genbatis.model.DropDownHtmlModel;
 import com.meizu.genbatis.model.FileuploadHtmlModel;
 import com.meizu.genbatis.model.HtmlTemplate;
 import com.meizu.genbatis.model.InputHtmlModel;
+import com.meizu.genbatis.model.InserTableJsModel;
 import com.meizu.genbatis.model.ModalhtmlModel;
 import com.meizu.genbatis.model.TableHtmlModel;
 import com.meizu.genbatis.model.TableThBean;
@@ -23,6 +24,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * @author tengqingya
@@ -40,8 +42,10 @@ public class debug {
 //        testbuttonGen();
 //        testDatepickerGen();
 //        testinputGen();
-        testFileUploadGen();
+//        testFileUploadGen();
+        testInserttableGen();
     }
+
 
     private static void testDropDownGen() {
         String fileName = "/template/html/dropdown.xml";
@@ -199,6 +203,24 @@ public class debug {
 
         FileuploadHtmlModel fileuploadHtmlModel = new FileuploadHtmlModel();
         String s = FreeMarkers.renderString(template.getContent(), JSON.parseObject(JSON.toJSONString(fileuploadHtmlModel)));
+
+        System.out.println(template.toString());
+        System.out.println(s);
+    }
+
+    private static void testInserttableGen() {
+        String fileName = "/template/js/inserttablejs.xml";
+        HtmlTemplate template = XmlUtil.fileToObject(fileName, HtmlTemplate.class);
+
+        InserTableJsModel inserTableJsModel =new InserTableJsModel();
+        inserTableJsModel.setJsName("commentManage");
+        List<String> stringList = new ArrayList<>();
+        stringList.add("flyme");
+        stringList.add("isTop");
+        stringList.add("sort");
+        inserTableJsModel.setColumnNames(stringList);
+
+        String s = FreeMarkers.renderString(template.getContent(), JSON.parseObject(JSON.toJSONString(inserTableJsModel)));
 
         System.out.println(template.toString());
         System.out.println(s);

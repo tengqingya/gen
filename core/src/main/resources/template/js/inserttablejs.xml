@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017. tengqingya@meizu.com qq:475804848 dingding:taizhoujiangyan.
+  -->
+
+<template>
+    <name>table</name>
+    <filePath>src/main/java/com/meizu/genbatis/tmp</filePath>
+    <fileName>${ClassName}.table</fileName>
+    <content>
+        <![CDATA[
+          query: function (refresh) {
+        var action = ${jsName}.URL.list(), argument, self = this;
+
+        argument = [
+        <#list columnNames as list>
+            <#if !list_has_next>
+                {name: "${list}", value: $('input[name="${list}"]').val()}
+            <#else>
+                {name: "${list}", value: $('input[name="${list}"]').val()},
+            </#if>
+        </#list>
+            {
+                name: "endTime",
+                value: parseInt($.datepicker.parseDateTime('yy-mm-dd', 'HH:mm:ss', $('input[name="endTime"]').val()).getTime() / 1000)
+            },
+            {
+                name: "startTime",
+                value: parseInt($.datepicker.parseDateTime('yy-mm-dd', 'HH:mm:ss', $('input[name="startTime"]').val()).getTime() / 1000)
+            }
+        ];
+        this.insertTable(action, argument, refresh);
+    },
+    insertTable: function (action, argument, refresh) {
+        //获取列表
+        var self = this;
+        $.get(commentManage.URL.count(), argument, function (result) {
+            if (result.code == 200) {
+                count1 = result.value;
+                oTable.dataTableWihtCallback(action, count1, argument, self.insertResult, function () {
+                    //$(".text_C.col-num-2").parent().css("width", "200px");
+                }, {
+                    refresh: refresh,
+                    pageCount: 20
+                });
+            } else {
+                asyncbox.alert("查询失败" + (result.message == "" ? result.message : ("：" + result.message)), "提示");
+            }
+        });
+
+    },
+    insertResult: function (result) {
+        var self = this;
+        var arr = [];
+        if (result.code != 200) {
+            return;
+        }
+        var value = result.value,
+        <#list columnNames as list>
+            <#if !list_has_next>
+                ${list};
+            <#else>
+                ${list},
+            </#if>
+        </#list>
+        for (var i = 0; i < value.length; i++) {
+            if (value[i].createTime > 0) {
+                createTime = new Date(value[i].createTime * 1000);
+                createTime = createTime.format("yyyy-MM-dd hh:mm:ss");
+            } else {
+                createTime = "";
+            }
+
+            <#list columnNames as list>
+            ${list} = value[i].${list};
+            </#list>
+
+
+            $opera1 += '<input type="hidden" value="" name="type" id="crossOrigin" data-toggle="modal" data-target="#myModal"/>';
+
+            $opera2 = '<a href="javascript:void(0);" class="operation J_reply"' +
+            <#list columnNames as list>
+            ' data-${list}=' + value[i].${list}
+            </#list>
+            + '>' + 1 + '</a>';
+            $opera3 = '<i class="operation" style="color: #0c0c0c"'+
+            <#list columnNames as list>
+            ' data-${list}=' + value[i].${list}
+            </#list>
+             + '>' + 1 + '</i>';
+
+            arr.push(['<input type="checkbox" class="checkchild checkall" />', id, flyme, userId, imei, star, '<div class="text_C col-num-2" title="' + content + '">' + content + '</div>', bookId, bookName, createTime, commentManage.hotStatus[value[i].hotStatus], praiseCount, $replyCount, $reportCount, $opera]);
+        }
+        self.num++;
+        result.draw = self.num;
+        result.recordsTotal = count1;
+        result.recordsFiltered = count1;
+        result.data = arr;
+    }
+        ]]>
+    </content>
+</template>
