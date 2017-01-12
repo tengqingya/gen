@@ -79,7 +79,7 @@
 
             $opera1 += '<input type="hidden" value="" name="type" id="crossOrigin" data-toggle="modal" data-target="#myModal"/>';
 
-            $opera2 = '<a href="javascript:void(0);" class="operation J_******"' +
+            $opera2 = '<a href="javascript:void(0);" class="operation J_*****"' +
             <#list columnNames?keys as list>
             ' data-${list}=' + value[i].${list}
             </#list>
