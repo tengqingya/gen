@@ -10,6 +10,7 @@ import com.meizu.genbatis.model.CheckboxAndRadioHtmlBean;
 import com.meizu.genbatis.model.CheckboxChildBean;
 import com.meizu.genbatis.model.DatepickerHtmlModel;
 import com.meizu.genbatis.model.DropDownHtmlModel;
+import com.meizu.genbatis.model.FileuploadHtmlModel;
 import com.meizu.genbatis.model.HtmlTemplate;
 import com.meizu.genbatis.model.InputHtmlModel;
 import com.meizu.genbatis.model.ModalhtmlModel;
@@ -32,13 +33,14 @@ public class debug {
         ApplicationContext x = new ClassPathXmlApplicationContext( new String[] {
                 "classpath*:config/applicationContext.xml"
         } );
-        testDropDownGen();
-        testtableGen();
-        testCheckBoxGen();
-        testModalGen();
-        testbuttonGen();
-        testDatepickerGen();
-        testinputGen();
+//        testDropDownGen();
+//        testtableGen();
+//        testCheckBoxGen();
+//        testModalGen();
+//        testbuttonGen();
+//        testDatepickerGen();
+//        testinputGen();
+        testFileUploadGen();
     }
 
     private static void testDropDownGen() {
@@ -186,6 +188,17 @@ public class debug {
         checkboxAndRadioHtmlBean.setType("radio");
 
         String s = FreeMarkers.renderString(template.getContent(), JSON.parseObject(JSON.toJSONString(checkboxAndRadioHtmlBean)));
+
+        System.out.println(template.toString());
+        System.out.println(s);
+    }
+
+    private static void testFileUploadGen() {
+        String fileName = "/template/html/fileupload.xml";
+        HtmlTemplate template = XmlUtil.fileToObject(fileName, HtmlTemplate.class);
+
+        FileuploadHtmlModel fileuploadHtmlModel = new FileuploadHtmlModel();
+        String s = FreeMarkers.renderString(template.getContent(), JSON.parseObject(JSON.toJSONString(fileuploadHtmlModel)));
 
         System.out.println(template.toString());
         System.out.println(s);

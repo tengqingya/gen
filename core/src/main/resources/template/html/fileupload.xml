@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017. tengqingya@meizu.com qq:475804848 dingding:taizhoujiangyan.
+  -->
+
+<template>
+    <name>fileupload</name>
+    <filePath>src/main/java/com/meizu/genbatis/tmp</filePath>
+    <fileName>${ClassName}.fileupload</fileName>
+    <content>
+        <![CDATA[
+         <div class="modal4-img">
+                            <div class="bookImg">
+                                <img src="/resources/node-ebook-manage/images/common/images/u93.png" class="imgLeft coverImg">
+                                <div class="imgDiv">
+                                    <div class="book-input form-group">
+                                        <span>图片地址：</span><input type="text" name="coverUrl" class="form-control coverUrl" disabled="disabled" value="{{= image}}" check-type="required" required-message="请上传一个图片">
+                                        <input type="hidden" id="coverHidden" check-type="required">
+                                    </div>
+                                    <div class="tipSpan">封面图1008*420</div>
+                                    <div class="bottomDiv">
+                                        <div class="btn btn-primary applic_btn browse_file_img" id="uploadCover">浏览</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+        ]]>
+    </content>
+</template>
