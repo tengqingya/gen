@@ -93,9 +93,17 @@
             arr.push([
             <#list columnNames?keys as list>
                 <#if !list_has_next>
-                ${list}
+                    <#if columnNames[list]=="true">
+                    '<div class="text_C col-num-2" title="' + ${list} + '">' + ${list} + '</div>'
+                    <#else>
+                    ${list}
+                    </#if>
                 <#else>
-                ${list},
+                    <#if columnNames[list]=="true">
+                    '<div class="text_C col-num-2" title="' + ${list} + '">' + ${list} + '</div>',
+                    <#else>
+                    ${list},
+                    </#if>
                 </#if>
             </#list>
             ]);

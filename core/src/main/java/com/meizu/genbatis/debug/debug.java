@@ -218,7 +218,7 @@ public class debug {
         InserTableJsModel inserTableJsModel =new InserTableJsModel();
         inserTableJsModel.setJsName("commentManage");
         Map<String,String> stringList = new HashMap<>();
-        stringList.put("a","false");
+        stringList.put("a","true");
         stringList.put("b","true");
         stringList.put("c","false");
         stringList.put("d","false");
