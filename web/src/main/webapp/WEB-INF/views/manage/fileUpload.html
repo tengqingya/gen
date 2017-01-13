@@ -98,6 +98,7 @@
             <button type="button" class="close" data-dismiss="alert"><span
                     aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             <strong>特别注意：</strong>
+            <i style="color: red">数据库建表语句字段必须包含not null，AUTO_INCREMENT、DEFAULT和COMMENT字段必须3选1。</i>
             如果生成失败，请重新点击选择按钮；请配置完成后再选择需要上传的sql文件；sql文件是建表语句，格式随便，但是每行只能有一个新建字段;修改配置后，请重新选择文件，请知悉！
         </div>
 
@@ -164,8 +165,8 @@
             <h5>
                 示例sql文件：<br>
                 CREATE TABLE `T_EBK_AUTHOR` (<br>
-                `FID` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '作者ID',<br>
-                `FNAME` varchar(64) NOT NULL DEFAULT '' COMMENT '作者名称',<br>
+                `FID` int(10) unsigned <i style="color: red">NOT NULL AUTO_INCREMENT</i> <i style="color: red">COMMENT</i> '作者ID',<br>
+                `FNAME` varchar(64) NOT NULL <i style="color: red">DEFAULT</i> '' COMMENT '作者名称',<br>
                 `FICON` varchar(256) NOT NULL DEFAULT '' COMMENT '作者头像地址',<br>
                 `FSUMMARY` varchar(1024) NOT NULL DEFAULT '' COMMENT '作者简介',<br>
                 `FUPDATE_TIME` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',<br>
