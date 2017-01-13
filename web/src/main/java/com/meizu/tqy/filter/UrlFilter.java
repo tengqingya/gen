@@ -1,5 +1,6 @@
 package com.meizu.tqy.filter;
 
+import com.meizu.genbatis.util.IpUtil;
 import com.meizu.tqy.util.UrlUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,13 +31,14 @@ public class UrlFilter extends GenericFilterBean {
         HttpServletResponse response = ( HttpServletResponse )servletResponse;
 
         String requestUrl = UrlUtil.getRequestUri( request );
+        String ip = IpUtil.getIpAddr( request );
 
         ///ng下 favicon.icon就不请求拉 如果使用注解方式 还是要让其走spring
 //        if( requestUrl.equalsIgnoreCase( "/favicon.ico" ) ) {
 //            return;
 //        }
 
-        LOGGER.info( String.format( "request start：url=%s", requestUrl ) );
+        LOGGER.info( String.format( "request start：url=%s,ip=%s", requestUrl,ip ) );
 
         filterChain.doFilter( request, response );
 

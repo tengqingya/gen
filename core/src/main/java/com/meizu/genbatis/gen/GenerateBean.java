@@ -65,7 +65,7 @@ public class GenerateBean {
             String beanName;
             String modelBeanType;
             String paramBeanType;
-            if(s.contains("COMMENT ")||s.contains("DEFAULT ")){
+            if(s.toLowerCase().contains("not null")&&(s.contains("COMMENT ")||s.contains("DEFAULT "))){
                 //有备注/默认值的行才解析
                 String[] split = s.startsWith(" ")?s.substring(1).trim().split(" "):s.trim().split(" ");
                 if(split.length>1){
