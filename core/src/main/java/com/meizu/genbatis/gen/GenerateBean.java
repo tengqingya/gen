@@ -65,7 +65,11 @@ public class GenerateBean {
             String beanName;
             String modelBeanType;
             String paramBeanType;
+<<<<<<< HEAD
             if(s.toLowerCase().contains("not null")&&(s.toLowerCase().contains("comment ")||s.toLowerCase().contains("default ")||s.toLowerCase().contains("auto_increment"))){
+=======
+            if(s.toLowerCase().contains("not null")&&(s.contains("COMMENT ")||s.contains("DEFAULT "))){
+>>>>>>> 615028bed6030b23347ca478b333fd50e254620c
                 //有备注/默认值的行才解析
                 String[] split = s.startsWith(" ")?s.substring(1).trim().split(" "):s.trim().split(" ");
                 if(split.length>1){
