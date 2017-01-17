@@ -218,11 +218,11 @@ public class debug {
         InserTableJsModel inserTableJsModel =new InserTableJsModel();
         inserTableJsModel.setJsName("commentManage");
         Map<String,String> stringList = new HashMap<>();
-        stringList.put("a","true");
-        stringList.put("b","true");
+        stringList.put("a","showTitle");
+        stringList.put("b","showTitle");
         stringList.put("c","false");
         stringList.put("d","false");
-        stringList.put("e","false");
+        stringList.put("e","sort");
         inserTableJsModel.setColumnNames(stringList);
 
         String s = FreeMarkers.renderString(template.getContent(), JSON.parseObject(JSON.toJSONString(inserTableJsModel)));

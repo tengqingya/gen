@@ -93,14 +93,17 @@
             arr.push([
             <#list columnNames?keys as list>
                 <#if !list_has_next>
-                    <#if columnNames[list]=="true">
+                    <#if columnNames[list]=="showTitle">
                     '<div class="text_C col-num-2" title="' + ${list} + '">' + ${list} + '</div>'
+                    <#elseif columnNames[list]=="sort">
+                    '<input type="text" data-id="' + id + '" value="' + ${list} + '" class="sortEdit" maxlength="3" style="width: 60px"/>'
                     <#else>
-                    ${list}
                     </#if>
                 <#else>
-                    <#if columnNames[list]=="true">
+                    <#if columnNames[list]=="showTitle">
                     '<div class="text_C col-num-2" title="' + ${list} + '">' + ${list} + '</div>',
+                    <#elseif columnNames[list]=="sort">
+                    '<input type="text" data-id="' + id + '" value="' + ${list} + '" class="sortEdit" maxlength="3" style="width: 60px"/>',
                     <#else>
                     ${list},
                     </#if>
