@@ -2,6 +2,22 @@ var fileUpload = {
 	init : function() {
 		this.bindEvents();
 	},
+	tmplate:'<tr>' +
+	'<td>#fieldTable</td>' +
+	'<td>#fieldName</td>' +
+	'<td>#fieldType</td>' +
+	'<td>' +
+	'<input type="radio" name="#fieldName" class="radio-type" id="#fieldName" value="1"/><lable for="#fieldName">button</lable>' +
+	'<input type="radio" name="#fieldName" class="radio-type" id="#fieldName" value="2"/><lable for="#fieldName">checkbox</lable>' +
+	'<input type="radio" name="#fieldName" class="radio-type" id="#fieldName" value="3"/><lable for="#fieldName">radio</lable>' +
+	'<input type="radio" name="#fieldName" class="radio-type" id="#fieldName" value="4"/><lable for="#fieldName">datepicker</lable>' +
+	'<input type="radio" name="#fieldName" class="radio-type" id="#fieldName" value="5"/><lable for="#fieldName">dropdown</lable>' +
+	'<input type="radio" name="#fieldName" class="radio-type" id="#fieldName" value="6"/><lable for="#fieldName">fileupload</lable>' +
+	'<input type="radio" name="#fieldName" class="radio-type" id="#fieldName" value="7"/><lable for="#fieldName">input</lable>' +
+	'<input type="radio" name="#fieldName" class="radio-type" id="#fieldName" value="8"/><lable for="#fieldName">modal</lable>' +
+	'</td>' +
+	'</tr>',
+	tmplateForbutton:'<tr><td colspan="4"><i style="float: left">button配置</i><input type="text" class="form-control" name="action" placeholder="action" style="width: 5%;float: left;"><input type="text" class="form-control" name="content" placeholder="content" style="width: 5%;float: left"></td></tr>',
 	bindEvents : function() {
 		$(".formValidate").validation();
 		var flag = 1;
@@ -100,6 +116,19 @@ var fileUpload = {
 						$('#progress .bar').text("生成完成");
 						$("#batchSearch").removeAttr("disabled");
 						$("#beginSearch").removeAttr("disabled");
+
+						//解析bean
+						var obj = JSON.parse(filePaths.autoBeanModel);
+						console.log(JSON.parse(filePaths.autoBeanModel).fieldType[0]);
+						console.log(JSON.parse(filePaths.autoBeanModel).fieldType);
+						console.log(JSON.parse(filePaths.autoBeanModel).fieldTable);
+						console.log(JSON.parse(filePaths.autoBeanModel).fieldName);
+
+						$("#example").css("display","");
+						for(var i=0;i<obj.fieldType.length;i++){
+							var tmp = fileUpload.tmplate.replace(/#fieldType/gi,obj.fieldType[i]).replace(/#fieldTable/gi,obj.fieldTable[i]).replace(/#fieldName/gi,obj.fieldName[i]);
+							$("#example").find("thead").append(tmp);
+						}
 					}
 					else{
 						$('#progress .bar').text("生成失败！"+ data.result.message).css("color", "red");
@@ -166,6 +195,27 @@ var fileUpload = {
 			$.ajax({
 				async : false,
 				url : '/manage/delete?path=' + filePath
+			});
+		});
+
+		$(".J_config").click(function(){
+			console.log("aaaa");
+			$("#example").find("thead").children("tr").each(function(i,j){
+				if(i>0){
+					var inputs = $(j).find("td:last").find("input");
+					console.log(inputs);
+					inputs.each(function(l,m){
+						if($(m).prop("checked")){
+							var text = $(m).next().text();
+							if(text == "button"){
+								$(j).after(fileUpload.tmplateForbutton);
+							}else if(text == ""){
+								
+							}
+							return false;
+						}
+					});
+				}
 			});
 		});
 	}

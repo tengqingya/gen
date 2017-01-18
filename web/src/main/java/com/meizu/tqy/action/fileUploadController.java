@@ -79,6 +79,7 @@ public class fileUploadController {
 		} catch( IOException e ) {
 			throw new GenerateException(ErrorCode.ServerDs.UNKOWN.getValue(), "生成临时文件错误", "");
 		}
+		paths.put("autoBeanModel",JSON.toJSONString(autoBeanModel));
 		return new ResultModel(paths);
 	}
 
