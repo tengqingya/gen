@@ -214,18 +214,16 @@ var fileUpload = {
 		});
 
 		$(".J_config").click(function(){
-			console.log("aaaa");
 			$(".config_tr").remove();
 			$("#example").find("thead").children("tr").each(function(i,j){
 				if(i>0){
 					var inputs = $(j).find("td:last").find("input");
-					console.log(inputs);
 					inputs.each(function(l,m){
 						if($(m).prop("checked")){
 							var text = $(m).next().text();
 							if(text == "button"){
 								$(j).after(fileUpload.tmplateForbutton);
-							}else if(text == "checkbox"){
+							}else if(text == "checkbox"||text == "radio"){
 								$(j).after(fileUpload.tmplateForcheckbox);
 							}
 							return false;
@@ -240,8 +238,11 @@ var fileUpload = {
 			var target = $(e.target);
 			if(target[0].tagName == "BUTTON"){
 				var _tr  = target.parent().parent();
-				console.log(_tr[0]);
-				$(_tr).after(_tr[0].outerHTML);
+				console.log(_tr);
+				console.log($(_tr).prop("previousSibling"));
+				//_tr[0]是将jquery对象转成dom对象
+				//_tr.after(_tr[0].outerHTML);
+				_tr.after(_tr.prop("outerHTML"));
 			}
 		});
 	}
