@@ -20,16 +20,16 @@ var fileUpload = {
 	tmplateForbutton:'<tr style="background: #f9f9f9" class="config_tr">' +
 	'<td colspan="4">' +
 	'<i style="float: left">button配置</i>' +
-	'<input type="text" class="form-control" name="action" placeholder="action" style="width: 5%;float: left;">' +
-	'<input type="text" class="form-control" name="content" placeholder="content" style="width: 5%;float: left">' +
+	'<input type="text" class="form-control button" name="action" placeholder="action" style="width: 5%;float: left;">' +
+	'<input type="text" class="form-control button" name="content" placeholder="content" style="width: 5%;float: left">' +
 	'</td>' +
 	'</tr>',
 	tmplateForcheckbox:'<tr style="background: #f9f9f9" class="config_tr">' +
 	'<td colspan="4">' +
 	'<i style="float: left">checkbox配置</i>' +
-	'<input type="text" class="form-control" name="id" placeholder="id" style="width: 5%;float: left;">' +
-	'<input type="text" class="form-control" name="content" placeholder="content" style="width: 5%;float: left">' +
-	'<input type="text" class="form-control" name="value" placeholder="value" style="width: 5%;float: left">' +
+	'<input type="text" class="form-control checkbox" name="id" placeholder="id" style="width: 5%;float: left;">' +
+	'<input type="text" class="form-control checkbox" name="content" placeholder="content" style="width: 5%;float: left">' +
+	'<input type="text" class="form-control checkbox" name="value" placeholder="value" style="width: 5%;float: left">' +
 	'<button class="btn btn-primary applic_btn J_add" style="float: right">添加</button>' +
 	'</td>' +
 	'</tr>',
@@ -244,6 +244,17 @@ var fileUpload = {
 				//_tr.after(_tr[0].outerHTML);
 				_tr.after(_tr.prop("outerHTML"));
 			}
+		});
+
+		$(".J_genTemplate").click(function(){
+			var json={},subArr = [],subJson={};
+			$('input[class="form-control button"]').each(function(i,j){
+				subJson={name:$(j).attr("name"),value:$(j).val()};
+				subArr.push(subJson);
+			});
+			json.button = subArr;
+			console.log(subArr);
+			console.log(json);
 		});
 	}
 };
