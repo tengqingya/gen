@@ -17,7 +17,22 @@ var fileUpload = {
 	'<input type="radio" name="#fieldName" class="radio-type" id="#fieldName" value="8"/><lable for="#fieldName">modal</lable>' +
 	'</td>' +
 	'</tr>',
-	tmplateForbutton:'<tr><td colspan="4"><i style="float: left">button配置</i><input type="text" class="form-control" name="action" placeholder="action" style="width: 5%;float: left;"><input type="text" class="form-control" name="content" placeholder="content" style="width: 5%;float: left"></td></tr>',
+	tmplateForbutton:'<tr style="background: #f9f9f9" class="config_tr">' +
+	'<td colspan="4">' +
+	'<i style="float: left">button配置</i>' +
+	'<input type="text" class="form-control" name="action" placeholder="action" style="width: 5%;float: left;">' +
+	'<input type="text" class="form-control" name="content" placeholder="content" style="width: 5%;float: left">' +
+	'</td>' +
+	'</tr>',
+	tmplateForcheckbox:'<tr style="background: #f9f9f9" class="config_tr">' +
+	'<td colspan="4">' +
+	'<i style="float: left">checkbox配置</i>' +
+	'<input type="text" class="form-control" name="id" placeholder="id" style="width: 5%;float: left;">' +
+	'<input type="text" class="form-control" name="content" placeholder="content" style="width: 5%;float: left">' +
+	'<input type="text" class="form-control" name="value" placeholder="value" style="width: 5%;float: left">' +
+	'<button class="btn btn-primary applic_btn J_add" style="float: right">添加</button>' +
+	'</td>' +
+	'</tr>',
 	bindEvents : function() {
 		$(".formValidate").validation();
 		var flag = 1;
@@ -200,6 +215,7 @@ var fileUpload = {
 
 		$(".J_config").click(function(){
 			console.log("aaaa");
+			$(".config_tr").remove();
 			$("#example").find("thead").children("tr").each(function(i,j){
 				if(i>0){
 					var inputs = $(j).find("td:last").find("input");
@@ -209,14 +225,24 @@ var fileUpload = {
 							var text = $(m).next().text();
 							if(text == "button"){
 								$(j).after(fileUpload.tmplateForbutton);
-							}else if(text == ""){
-								
+							}else if(text == "checkbox"){
+								$(j).after(fileUpload.tmplateForcheckbox);
 							}
 							return false;
 						}
 					});
 				}
 			});
+		});
+
+		//点击按钮继续新增一行
+		$("#example").on("click",".config_tr",function(e){
+			var target = $(e.target);
+			if(target[0].tagName == "BUTTON"){
+				var _tr  = target.parent().parent();
+				console.log(_tr[0]);
+				$(_tr).after(_tr[0].outerHTML);
+			}
 		});
 	}
 };
