@@ -38,6 +38,8 @@ public class debug {
         ApplicationContext x = new ClassPathXmlApplicationContext( new String[] {
                 "classpath*:config/applicationContext.xml"
         } );
+
+
 //        testDropDownGen();
 //        testtableGen();
 //        testCheckBoxGen();
