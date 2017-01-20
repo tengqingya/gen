@@ -17,14 +17,14 @@ var fileUpload = {
 	'<input type="radio" name="#fieldName" class="radio-type" id="#fieldName" value="8"/><lable for="#fieldName">modal</lable>' +
 	'</td>' +
 	'</tr>',
-	tmplateForbutton:'<tr style="background: #f9f9f9" class="config_tr">' +
+	tmplateForbutton:'<tr style="background: #f9f9f9" class="config_tr config_button">' +
 	'<td colspan="4">' +
 	'<i style="float: left">button配置</i>' +
 	'<input type="text" class="form-control button" name="action" placeholder="action" style="width: 5%;float: left;">' +
 	'<input type="text" class="form-control button" name="content" placeholder="content" style="width: 5%;float: left">' +
 	'</td>' +
 	'</tr>',
-	tmplateForcheckbox:'<tr style="background: #f9f9f9" class="config_tr">' +
+	tmplateForcheckbox:'<tr style="background: #f9f9f9" class="config_tr config_checkbox">' +
 	'<td colspan="4">' +
 	'<i style="float: left">checkbox配置</i>' +
 	'<input type="text" class="form-control checkbox" name="id" placeholder="id" style="width: 5%;float: left;">' +
@@ -247,14 +247,47 @@ var fileUpload = {
 		});
 
 		$(".J_genTemplate").click(function(){
-			var json={},subArr = [],subJson={};
-			$('input[class="form-control button"]').each(function(i,j){
-				subJson={name:$(j).attr("name"),value:$(j).val()};
-				subArr.push(subJson);
+			var arr = [],json={},
+				subArrButton = [],
+				subArrCheckbox = [];
+			$(".config_tr").each(function(i,j){
+				if($(j).hasClass("config_button")){
+					var subJson={};
+					$(j).find("input").each(function(l,m){
+						subJson[$(m).attr("name")] = $(m).val();
+					});
+					//如果push结束之后 改变subjson的值 那么之前push的值也会改变
+					subArrButton.push(subJson);
+				}else if($(j).hasClass("config_checkbox")){
+					var subJson={};
+					$(j).find("input").each(function(l,m){
+						subJson[$(m).attr("name")] = $(m).val();
+					});
+					subArrCheckbox.push(subJson);
+				}
 			});
-			json.button = subArr;
-			console.log(subArr);
-			console.log(json);
+			//$('input[class="form-control button"]').each(function(i,j){
+			//	subJson={name:$(j).attr("name"),value:$(j).val()};
+			//	subArr.push(subJson);
+			//});
+			json.button = subArrButton;
+			json.checkbox = subArrCheckbox;
+			//console.log(subArr);
+			//console.log(json);
+			//arr.push(json);
+
+			$.ajax({
+				type: "GET",
+				url: "/manage/genHtml",
+				data: {"config":JSON.stringify(json)},
+				success: function (result) {
+					if (result.code == 200 && result.value) {
+						asyncbox.alert("添加成功", "提示");
+					} else {
+						asyncbox.alert("添加失败" + (result.message == "" ? result.message : ("：" + result.message)), "提示");
+					}
+				}
+			})
 		});
 	}
 };

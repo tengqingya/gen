@@ -12,6 +12,6 @@
     <!--配置文件 本地配置文件位置-->
     <context:property-placeholder location="classpath:/gen.properties"/>
 
-    <context:component-scan base-package="com.meizu.genbatis.gen"></context:component-scan>
+    <context:component-scan base-package="com.meizu.genbatis.gen,com.meizu.genbatis.target,com.meizu.genbatis.adapter"></context:component-scan>
 
 </beans>
