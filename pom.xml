@@ -17,6 +17,21 @@
         <module>core</module>
     </modules>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>mybatis-gen-parent</groupId>
+                <artifactId>core</artifactId>
+                <version>${generate.parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>mybatis-gen-parent</groupId>
+                <artifactId>web</artifactId>
+                <version>${generate.parent.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <!--如果没有如下，则maveninsal的时候会报 字符串编码错误等-->
     <build>
         <plugins>
