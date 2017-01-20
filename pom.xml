@@ -17,6 +17,8 @@
         <module>core</module>
     </modules>
 
+    
+    <!--打包时 使得子模块和父模块版本号一致-->
     <dependencyManagement>
         <dependencies>
             <dependency>
