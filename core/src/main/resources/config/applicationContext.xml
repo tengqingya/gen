@@ -12,6 +12,9 @@
     <!--配置文件 本地配置文件位置-->
     <context:property-placeholder location="classpath:/gen.properties"/>
 
+    <bean id="springContextHolder" class="com.meizu.genbatis.util.SpringContextHolder" lazy-init="false"></bean>
+
     <context:component-scan base-package="com.meizu.genbatis.gen,com.meizu.genbatis.target,com.meizu.genbatis.adapter"></context:component-scan>
+
 
 </beans>

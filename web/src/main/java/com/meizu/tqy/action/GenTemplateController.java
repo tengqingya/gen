@@ -5,10 +5,14 @@
 package com.meizu.tqy.action;
 
 import com.meizu.genbatis.model.ResultModel;
+import com.meizu.genbatis.service.TestService;
 import com.meizu.genbatis.target.TargetGenInterface;
+import com.meizu.genbatis.util.SpringContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -28,7 +32,12 @@ public class GenTemplateController {
     @RequestMapping("/genHtml")
     @ResponseBody
     public ResultModel genHtmlTemplate(String config){
+        Assert.notNull(config);
         targetGenInterface.genTemplate(config);
+//        ApplicationContext applicationContext = SpringContextHolder.getApplicationContext();
+//        System.out.println("applicationContext"+applicationContext);
+        TestService testService = (TestService)SpringContextHolder.getBean("testService");
+        System.out.println(testService.testService());
         return new ResultModel(true);
     }
 
