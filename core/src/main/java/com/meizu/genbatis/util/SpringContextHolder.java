@@ -3,7 +3,7 @@
  */
 package com.meizu.genbatis.util;
 
-import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationContext;
@@ -103,8 +103,7 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
 	 * 检查ApplicationContext不为空.
 	 */
 	private static void assertContextInjected() {
-		//// TODO: 2017/1/22 class not found
 		System.out.print("app:"+applicationContext);
-		Validate.validState(applicationContext != null, "applicaitonContext属性未注入, 请在applicationContext.xml中定义SpringContextHolder.");
+		Validate.notNull(applicationContext != null, "applicaitonContext属性未注入, 请在applicationContext.xml中定义SpringContextHolder.");
 	}
 }
