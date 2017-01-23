@@ -233,6 +233,31 @@ var fileUpload = {
 			});
 		});
 
+		$(".J_play").click(function(){
+			var argument = [
+				{name:"age",value:"22"},
+				{name:"email",value:"tengqingya"},
+				{name:"name",value:"滕庆亚"},
+				{name:"status",value:"0"},
+				{name:"cancel",value:"false"}
+			];
+			$.ajax({
+				type: "GET",
+				url: "/manage/play",
+				data: argument,
+				success: function (result) {
+					if (result.code == 200 && result.value) {
+						console.log("suc");
+						asyncbox.alert("添加成功", "提示");
+					} else {
+						console.log("error");
+						//asyncbox.alert("添加失败" + (result.message == "" ? result.message : ("：" + result.message)), "提示");
+						alert("添加失败" + (result.message == "" ? result.message : ("：" + result.message)));
+					}
+				}
+			})
+		});
+
 		//点击按钮继续新增一行
 		$("#example").on("click",".config_tr",function(e){
 			var target = $(e.target);

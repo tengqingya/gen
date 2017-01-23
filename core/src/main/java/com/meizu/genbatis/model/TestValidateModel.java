@@ -6,7 +6,11 @@ package com.meizu.genbatis.model;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * hibelate_validate测试
@@ -17,14 +21,21 @@ import org.hibernate.validator.constraints.Range;
 public class TestValidateModel {
     @Range(min = 1,max = 130,message = "年龄1到130岁")
     private int age;
-    @Email(regexp = "tengqingya",message = "邮箱只能是tengqingya的")
+
+    @Email(message = "邮箱只能是tengqingya的")
+    @NotBlank(message = "email不能为blacnk")
     private String email;
+
+    @NotNull(message = "name不能为null")
     @Length(min = 1,max = 4,message = "姓名长度1到3位")
     private String name;
-    @Length(max = 10,message = "time 时间戳只能10位")
+
+    @Range(min = 0,max = Integer.MAX_VALUE,message = "time 时间戳只能10位")
     private int startTime;
+
     @Range(min = 0,max = 1,message = "状态只能是0和1")
     private int status;
+
     private boolean cancel;
 
     public int getAge() {

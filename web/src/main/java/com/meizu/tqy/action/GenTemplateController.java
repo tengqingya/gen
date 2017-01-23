@@ -4,17 +4,27 @@
 
 package com.meizu.tqy.action;
 
+import com.meizu.genbatis.exception.ErrorCode;
+import com.meizu.genbatis.exception.GenerateException;
 import com.meizu.genbatis.model.ResultModel;
+import com.meizu.genbatis.model.TestValidateModel;
 import com.meizu.genbatis.service.TestService;
 import com.meizu.genbatis.target.TargetGenInterface;
 import com.meizu.genbatis.util.SpringContextHolder;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 /**
  * 生成模版控制器
@@ -38,6 +48,18 @@ public class GenTemplateController {
 //        System.out.println("applicationContext"+applicationContext);
 //        TestService testService = (TestService)SpringContextHolder.getBean("testService");
 //        System.out.println(testService.testService());
+        return new ResultModel(true);
+    }
+
+    @RequestMapping("/play")
+    @ResponseBody
+    public ResultModel genHtmlTemplate(@Valid TestValidateModel model,BindingResult result){
+        System.out.println(model);
+        //如果某个属性为空，则不会使用length range 等去验证
+        //要想为空报错 只有加上notnull
+        if(result.getAllErrors().size()>0){
+            throw new GenerateException(ErrorCode.ServerDs.UNKOWN.getValue(),result.getAllErrors().get(0).getDefaultMessage(), "");
+        }
         return new ResultModel(true);
     }
 
