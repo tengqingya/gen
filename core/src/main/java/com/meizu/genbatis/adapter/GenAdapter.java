@@ -9,6 +9,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.meizu.genbatis.adaptee.AdapteeInterface;
 import com.meizu.genbatis.target.TargetGenInterface;
+import org.apache.commons.lang.Validate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -33,11 +34,11 @@ public class GenAdapter implements TargetGenInterface,AdapteeInterface {
 
     @Override
     public void genButton(List<Object> list ) {
-        Assert.notNull(list);
+        Validate.notEmpty(list,"集合非空");
     }
 
     @Override
     public void genCheckbox(List<Object> list ) {
-        Assert.notNull(list);
+        Validate.notEmpty(list,"集合非空");
     }
 }
