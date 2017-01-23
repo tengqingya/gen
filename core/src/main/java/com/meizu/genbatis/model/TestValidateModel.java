@@ -4,6 +4,7 @@
 
 package com.meizu.genbatis.model;
 
+import com.meizu.genbatis.checkgroups.CheckByManual;
 import com.meizu.genbatis.checkgroups.CheckDeleteGroup;
 import com.meizu.genbatis.checkgroups.CheckUpdateGroup;
 import org.hibernate.validator.constraints.Email;
@@ -37,7 +38,7 @@ public class TestValidateModel {
     @Range(min = 0,max = Integer.MAX_VALUE,message = "time 时间戳只能10位")
     private int startTime;
 
-    @Range(min = 0,max = 1,message = "状态只能是0和1")
+    @Range.List({@Range(min = 0,max = 1,message = "状态只能是0和1"),@Range(min = 1,max = 6,message = "状态只能是1和6",groups = CheckByManual.class)})
     private int status;
 
     private boolean cancel;

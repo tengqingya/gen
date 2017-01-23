@@ -4,6 +4,7 @@
 
 package com.meizu.tqy.action;
 
+import com.meizu.genbatis.checkgroups.CheckByManual;
 import com.meizu.genbatis.checkgroups.CheckDeleteGroup;
 import com.meizu.genbatis.checkgroups.CheckUpdateGroup;
 import com.meizu.genbatis.exception.ErrorCode;
@@ -28,6 +29,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+import java.util.Set;
 
 /**
  * 生成模版控制器
@@ -63,6 +70,13 @@ public class GenTemplateController {
         //使用分组的时候，必须如果不加defaultclass则 默认不会使用，要想不同分组使用不同的验证方法则使用list
         if(result.getAllErrors().size()>0){
             throw new GenerateException(ErrorCode.ServerDs.UNKOWN.getValue(),result.getAllErrors().get(0).getDefaultMessage(), "");
+        }
+        //手动验证
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<TestValidateModel>> validate = validator.validate(model, CheckByManual.class);
+        if(validate.size()>0){
+            throw new GenerateException(ErrorCode.ServerDs.UNKOWN.getValue(),validate.iterator().next().getMessage(), "");
         }
         return new ResultModel(true);
     }
