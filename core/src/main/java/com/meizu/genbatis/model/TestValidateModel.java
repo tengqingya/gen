@@ -4,6 +4,8 @@
 
 package com.meizu.genbatis.model;
 
+import com.meizu.genbatis.checkgroups.CheckDeleteGroup;
+import com.meizu.genbatis.checkgroups.CheckUpdateGroup;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
@@ -11,6 +13,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.groups.Default;
 
 /**
  * hibelate_validate测试
@@ -19,15 +22,16 @@ import javax.validation.constraints.NotNull;
  * @create 2017-01-23 10:40
  */
 public class TestValidateModel {
-    @Range(min = 1,max = 130,message = "年龄1到130岁")
+    @Range(min = 1,max = 130,message = "年龄1到130岁",groups = {CheckUpdateGroup.class, Default.class})
     private int age;
 
     @Email(message = "邮箱只能是tengqingya的")
     @NotBlank(message = "email不能为blacnk")
     private String email;
 
-    @NotNull(message = "name不能为null")
-    @Length(min = 1,max = 4,message = "姓名长度1到3位")
+    @NotNull(message = "name不能为null",groups = CheckUpdateGroup.class)
+
+    @Length.List({@Length(min = 1,max = 4,message = "姓名长度1到4位",groups = {CheckUpdateGroup.class, Default.class}),@Length(min = 1,max = 1,message = "姓名长度1位",groups = CheckDeleteGroup.class)})
     private String name;
 
     @Range(min = 0,max = Integer.MAX_VALUE,message = "time 时间戳只能10位")

@@ -37,13 +37,13 @@
 
     <dependencies>
 
-        <!--触发校验-->
-        <dependency>
-            <groupId>xml-apis</groupId>
-            <artifactId>xml-apis</artifactId>
-            <version>1.4.01</version>
-        </dependency>
-        <!--触发校验-->
+        <!--&lt;!&ndash;触发校验&ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>xml-apis</groupId>-->
+            <!--<artifactId>xml-apis</artifactId>-->
+            <!--<version>1.4.01</version>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash;触发校验&ndash;&gt;-->
 
         <!--<dependency>-->
             <!--<groupId>org.apache.commons</groupId>-->
