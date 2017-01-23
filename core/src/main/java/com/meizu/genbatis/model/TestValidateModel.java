@@ -41,6 +41,9 @@ public class TestValidateModel {
     @Range.List({@Range(min = 0,max = 1,message = "状态只能是0和1"),@Range(min = 1,max = 6,message = "状态只能是1和6",groups = CheckByManual.class)})
     private int status;
 
+    @Range(min = 1,max = Long.MAX_VALUE)
+    private long id;
+
     private boolean cancel;
 
     public int getAge() {
@@ -91,6 +94,14 @@ public class TestValidateModel {
         this.cancel = cancel;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId( long id ) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "TestValidateModel{" +
@@ -99,6 +110,7 @@ public class TestValidateModel {
                 ", name='" + name + '\'' +
                 ", startTime=" + startTime +
                 ", status=" + status +
+                ", id=" + id +
                 ", cancel=" + cancel +
                 '}';
     }
