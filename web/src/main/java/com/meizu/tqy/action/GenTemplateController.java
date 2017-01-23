@@ -36,8 +36,8 @@ public class GenTemplateController {
         targetGenInterface.genTemplate(config);
 //        ApplicationContext applicationContext = SpringContextHolder.getApplicationContext();
 //        System.out.println("applicationContext"+applicationContext);
-        TestService testService = (TestService)SpringContextHolder.getBean("testService");
-        System.out.println(testService.testService());
+//        TestService testService = (TestService)SpringContextHolder.getBean("testService");
+//        System.out.println(testService.testService());
         return new ResultModel(true);
     }
 

@@ -32,6 +32,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <freemarker.version>2.3.20</freemarker.version>
         <commons-lang3.version>3.3.1</commons-lang3.version>
+        <validator.version>5.2.4.Final</validator.version>
     </properties>
 
     <dependencies>
@@ -41,6 +42,14 @@
             <!--<artifactId>commons-lang3</artifactId>-->
             <!--<version>${commons-lang3.version}</version>-->
         <!--</dependency>-->
+
+        <!-- bean validate -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${validator.version}</version>
+        </dependency>
+        <!-- SPRING end -->
 
         <!-- freemarker engine -->
         <dependency>
