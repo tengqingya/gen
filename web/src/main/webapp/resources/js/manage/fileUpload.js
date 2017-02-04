@@ -270,6 +270,8 @@ var fileUpload = {
 						subJson[$(m).attr("name")] = $(m).val();
 					});
 					ssubArrCheckbox.push(subJson);
+					//一组checkbox放到一个数组里面{"button":[{"action":"1","content":"1"}],"checkbox":[{"type":"checkbox","checkboxList":[{"id":"2","content":"2","value":"2"},{"id":"3","content":"3","value":"3"}]},{"type":"checkbox","checkboxList":[{"id":"5","content":"5","value":"5"},{"id":"6","content":"7","value":"8"}]}]}
+					//如果两个checkbox不相邻则判断为非一组checkbox，相邻则放到同一个数组
 					if(!$(j).next().hasClass("config_checkbox")){
 						ssubjson.type = "checkbox";
 						ssubjson.checkboxList = ssubArrCheckbox;

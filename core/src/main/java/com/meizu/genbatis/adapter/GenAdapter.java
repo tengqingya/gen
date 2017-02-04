@@ -36,6 +36,7 @@ public class GenAdapter implements TargetGenInterface,AdapteeInterface {
     @Override
     public void genButton(List<Object> list ) {
         Validate.notEmpty(list,"集合非空");
+
         String fileName = "/template/html/button.xml";
         HtmlTemplate template = XmlUtil.fileToObject(fileName, HtmlTemplate.class);
 
