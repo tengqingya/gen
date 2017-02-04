@@ -23,6 +23,7 @@ public class FreeMarkers {
 	public static String renderString(String templateString, Map<String, ?> model) {
 		try {
 			StringWriter result = new StringWriter();
+			//IteratorBlock.java中定义了常见freemarker函数
 			Template t = new Template("name", new StringReader(templateString), new Configuration());
 			t.process(model, result);
 			return result.toString();

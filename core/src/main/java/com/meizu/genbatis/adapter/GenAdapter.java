@@ -8,16 +8,13 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.meizu.genbatis.adaptee.AdapteeInterface;
-import com.meizu.genbatis.model.ButtonHtmlModel;
 import com.meizu.genbatis.model.HtmlTemplate;
 import com.meizu.genbatis.target.TargetGenInterface;
 import com.meizu.genbatis.util.FreeMarkers;
 import com.meizu.genbatis.util.XmlUtil;
 import org.apache.commons.lang.Validate;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -33,6 +30,7 @@ public class GenAdapter implements TargetGenInterface,AdapteeInterface {
         JSONObject jsonObject = JSON.parseObject(config);
         JSONArray array = (JSONArray)jsonObject.get("button");
         genButton(array);
+        genCheckbox((JSONArray)jsonObject.get("checkbox"));
     }
 
     @Override
@@ -52,5 +50,16 @@ public class GenAdapter implements TargetGenInterface,AdapteeInterface {
     @Override
     public void genCheckbox(List<Object> list ) {
         Validate.notEmpty(list,"集合非空");
+
+        String fileName = "/template/html/checkbox.xml";
+        HtmlTemplate template = XmlUtil.fileToObject(fileName, HtmlTemplate.class);
+
+        //bean属性和jsonobject的时候使用name="${l.id}"或者name="${item["id"]}"都可以
+        String s;
+        for(Object o:list){
+            s = FreeMarkers.renderString(template.getContent(), (JSONObject)o);
+
+            System.out.println(s);
+        }
     }
 }

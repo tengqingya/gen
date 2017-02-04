@@ -27,6 +27,7 @@ var fileUpload = {
 	tmplateForcheckbox:'<tr style="background: #f9f9f9" class="config_tr config_checkbox">' +
 	'<td colspan="4">' +
 	'<i style="float: left">checkbox配置</i>' +
+		//此处name属性必须和模版中属性一致
 	'<input type="text" class="form-control checkbox" name="id" placeholder="id" style="width: 5%;float: left;">' +
 	'<input type="text" class="form-control checkbox" name="content" placeholder="content" style="width: 5%;float: left">' +
 	'<input type="text" class="form-control checkbox" name="value" placeholder="value" style="width: 5%;float: left">' +
@@ -253,6 +254,7 @@ var fileUpload = {
 			var arr = [],json={},
 				subArrButton = [],
 				subArrCheckbox = [];
+			var ssubArrCheckbox = [];
 			$(".config_tr").each(function(i,j){
 				if($(j).hasClass("config_button")){
 					var subJson={};
@@ -263,10 +265,17 @@ var fileUpload = {
 					subArrButton.push(subJson);
 				}else if($(j).hasClass("config_checkbox")){
 					var subJson={};
+					var ssubjson = {};
 					$(j).find("input").each(function(l,m){
 						subJson[$(m).attr("name")] = $(m).val();
 					});
-					subArrCheckbox.push(subJson);
+					ssubArrCheckbox.push(subJson);
+					if(!$(j).next().hasClass("config_checkbox")){
+						ssubjson.type = "checkbox";
+						ssubjson.checkboxList = ssubArrCheckbox;
+						ssubArrCheckbox = [];
+						subArrCheckbox.push(ssubjson);
+					}
 				}
 			});
 			//$('input[class="form-control button"]').each(function(i,j){
