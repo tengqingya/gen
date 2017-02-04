@@ -142,7 +142,7 @@ var fileUpload = {
 						$("#example").css("display","");
 						for(var i=0;i<obj.fieldType.length;i++){
 							var tmp = fileUpload.tmplate.replace(/#fieldType/gi,obj.fieldType[i]).replace(/#fieldTable/gi,obj.fieldTable[i]).replace(/#fieldName/gi,obj.fieldName[i]);
-							$("#example").find("thead").append(tmp);
+							$("#example").find("tbody").append(tmp);
 						}
 					}
 					else{
@@ -215,7 +215,7 @@ var fileUpload = {
 
 		$(".J_config").click(function(){
 			$(".config_tr").remove();
-			$("#example").find("thead").children("tr").each(function(i,j){
+			$("#example").find("tbody").children("tr").each(function(i,j){
 				if(i>0){
 					var inputs = $(j).find("td:last").find("input");
 					inputs.each(function(l,m){
@@ -238,10 +238,13 @@ var fileUpload = {
 			var target = $(e.target);
 			if(target[0].tagName == "BUTTON"){
 				var _tr  = target.parent().parent();
-				console.log(_tr);
-				console.log($(_tr).prop("previousSibling"));
+				//console.log(_tr);
+				//包装2次效果一样
+				//console.log($(_tr).prop("previousSibling"));
+				//console.log(_tr.prop("previousSibling"));
 				//_tr[0]是将jquery对象转成dom对象
 				//_tr.after(_tr[0].outerHTML);
+				//使用prop得到属性值
 				_tr.after(_tr.prop("outerHTML"));
 			}
 		});
