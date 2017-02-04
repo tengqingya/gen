@@ -7,14 +7,14 @@ var fileUpload = {
 	'<td>#fieldName</td>' +
 	'<td>#fieldType</td>' +
 	'<td>' +
-	'<input type="radio" name="#fieldName" class="radio-type" id="#fieldName" value="1"/><lable for="#fieldName">button</lable>' +
-	'<input type="radio" name="#fieldName" class="radio-type" id="#fieldName" value="2"/><lable for="#fieldName">checkbox</lable>' +
-	'<input type="radio" name="#fieldName" class="radio-type" id="#fieldName" value="3"/><lable for="#fieldName">radio</lable>' +
-	'<input type="radio" name="#fieldName" class="radio-type" id="#fieldName" value="4"/><lable for="#fieldName">datepicker</lable>' +
-	'<input type="radio" name="#fieldName" class="radio-type" id="#fieldName" value="5"/><lable for="#fieldName">dropdown</lable>' +
-	'<input type="radio" name="#fieldName" class="radio-type" id="#fieldName" value="6"/><lable for="#fieldName">fileupload</lable>' +
-	'<input type="radio" name="#fieldName" class="radio-type" id="#fieldName" value="7"/><lable for="#fieldName">input</lable>' +
-	'<input type="radio" name="#fieldName" class="radio-type" id="#fieldName" value="8"/><lable for="#fieldName">modal</lable>' +
+	'<input type="radio" name="#fieldName" class="radio-type"  value="1"/><lable for="#fieldName">button</lable>' +
+	'<input type="radio" name="#fieldName" class="radio-type"  value="2"/><lable for="#fieldName">checkbox</lable>' +
+	'<input type="radio" name="#fieldName" class="radio-type"  value="3"/><lable for="#fieldName">radio</lable>' +
+	'<input type="radio" name="#fieldName" class="radio-type"  value="4"/><lable for="#fieldName">datepicker</lable>' +
+	'<input type="radio" name="#fieldName" class="radio-type"  value="5"/><lable for="#fieldName">dropdown</lable>' +
+	'<input type="radio" name="#fieldName" class="radio-type"  value="6"/><lable for="#fieldName">fileupload</lable>' +
+	'<input type="radio" name="#fieldName" class="radio-type"  value="7"/><lable for="#fieldName">input</lable>' +
+	'<input type="radio" name="#fieldName" class="radio-type"  value="8"/><lable for="#fieldName">modal</lable>' +
 	'</td>' +
 	'</tr>',
 	tmplateForbutton:'<tr style="background: #f9f9f9" class="config_tr config_button">' +
