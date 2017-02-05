@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface AdapteeInterface<T> {
 
-    void genButton( List<T> list );
+    void button( List<T> list ,String fileName);
 
-    void genCheckbox(List<T> list );
+    void checkbox( List<T> list,String fileName );
 }
