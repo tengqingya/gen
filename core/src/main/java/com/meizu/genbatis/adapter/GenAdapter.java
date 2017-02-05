@@ -5,7 +5,6 @@
 package com.meizu.genbatis.adapter;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.meizu.genbatis.adaptee.AdapteeInterface;
 import com.meizu.genbatis.model.HtmlTemplate;
@@ -24,37 +23,36 @@ import java.util.List;
  * @create 2017-01-20 14:56
  */
 @Service()
-public class GenAdapter implements TargetGenInterface,AdapteeInterface {
+public class GenAdapter implements TargetGenInterface,AdapteeInterface<JSONObject> {
     @Override
     public void genTemplate( String config ) {
         JSONObject jsonObject = JSON.parseObject(config);
-        JSONArray array = (JSONArray)jsonObject.get("button");
-        genButton(array);
-        genCheckbox((JSONArray)jsonObject.get("checkbox"));
+        genButton((List<JSONObject>)jsonObject.get("button"));
+        genCheckbox((List<JSONObject>)jsonObject.get("checkbox"));
     }
 
     @Override
-    public void genButton(List<Object> list ) {
+    public void genButton(List<JSONObject> list ) {
         Validate.notEmpty(list,"集合非空");
         String fileName = "/template/html/button.xml";
         HtmlTemplate template = XmlUtil.fileToObject(fileName, HtmlTemplate.class);
         String s;
-        for(Object o:list){
-            s = FreeMarkers.renderString(template.getContent(), (JSONObject)o);
+        for( JSONObject o:list){
+            s = FreeMarkers.renderString(template.getContent(), o);
 
             System.out.println(s);
         }
     }
 
     @Override
-    public void genCheckbox(List<Object> list ) {
+    public void genCheckbox(List<JSONObject> list ) {
         Validate.notEmpty(list,"集合非空");
         String fileName = "/template/html/checkbox.xml";
         HtmlTemplate template = XmlUtil.fileToObject(fileName, HtmlTemplate.class);
         //bean属性和jsonobject的时候使用name="${l.id}"或者name="${item["id"]}"都可以
         String s;
-        for(Object o:list){
-            s = FreeMarkers.renderString(template.getContent(), (JSONObject)o);
+        for( JSONObject o:list){
+            s = FreeMarkers.renderString(template.getContent(), o);
 
             System.out.println(s);
         }
