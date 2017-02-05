@@ -36,10 +36,8 @@ public class GenAdapter implements TargetGenInterface,AdapteeInterface {
     @Override
     public void genButton(List<Object> list ) {
         Validate.notEmpty(list,"集合非空");
-
         String fileName = "/template/html/button.xml";
         HtmlTemplate template = XmlUtil.fileToObject(fileName, HtmlTemplate.class);
-
         String s;
         for(Object o:list){
             s = FreeMarkers.renderString(template.getContent(), (JSONObject)o);
@@ -51,10 +49,8 @@ public class GenAdapter implements TargetGenInterface,AdapteeInterface {
     @Override
     public void genCheckbox(List<Object> list ) {
         Validate.notEmpty(list,"集合非空");
-
         String fileName = "/template/html/checkbox.xml";
         HtmlTemplate template = XmlUtil.fileToObject(fileName, HtmlTemplate.class);
-
         //bean属性和jsonobject的时候使用name="${l.id}"或者name="${item["id"]}"都可以
         String s;
         for(Object o:list){
