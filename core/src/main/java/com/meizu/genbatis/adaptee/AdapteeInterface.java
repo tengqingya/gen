@@ -26,4 +26,6 @@ public interface AdapteeInterface<T> {
     void fileupload( List<T> list,String fileName );
 
     void input( List<T> list,String fileName );
+
+    void modal( List<T> list,String fileName );
 }

@@ -89,6 +89,13 @@ var fileUpload = {
 	'<input type="text" class="form-control input" name="requiredMessage" placeholder="requiredMessage" style="width: 5%;float: left" value="requiredMessage">' +
 	'</td>' +
 	'</tr>',
+	tmplateFormodal:'<tr style="background: #f9f9f9" class="config_tr config_modal">' +
+	'<td colspan="4">' +
+	'<i style="float: left">modal配置</i>' +
+	'<input type="text" class="form-control" name="id" placeholder="id" style="width: 5%;float: left;" value="myModal">' +
+	'<input type="text" class="form-control" name="content" placeholder="content" style="width: 5%;float: left;" value="新增">' +
+	'</td>' +
+	'</tr>',
 	bindEvents : function() {
 		$(".formValidate").validation();
 		var flag = 1;
@@ -287,6 +294,8 @@ var fileUpload = {
 								$(j).after(fileUpload.tmplateForfileupload);
 							}else if(text == "input"){
 								$(j).after(fileUpload.tmplateForinput);
+							}else if(text == "modal"){
+								$(j).after(fileUpload.tmplateFormodal);
 							}
 							return false;
 						}
@@ -317,6 +326,7 @@ var fileUpload = {
 				subArrDatepicker = [],
 				subArrFileupload = [],
 				subArrInput = [],
+				subArrModal = [],
 				subArrDropdown = [],
 				subArrCheckbox = [],
 				subArrRadio = [];
@@ -383,6 +393,12 @@ var fileUpload = {
 						subJson[$(m).attr("name")] = $(m).val();
 					});
 					subArrInput.push(subJson);
+				}else if($(j).hasClass("config_modal")){
+					var subJson={};
+					$(j).find("input").each(function(l,m){
+						subJson[$(m).attr("name")] = $(m).val();
+					});
+					subArrModal.push(subJson);
 				}
 			});
 			//$('input[class="form-control button"]').each(function(i,j){
@@ -396,6 +412,7 @@ var fileUpload = {
 			json.dropdown = subArrDropdown;
 			json.fileupload = subArrFileupload;
 			json.input = subArrInput;
+			json.modal = subArrModal;
 
 			$.ajax({
 				type: "GET",
