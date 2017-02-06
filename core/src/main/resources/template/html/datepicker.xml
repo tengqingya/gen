@@ -12,13 +12,13 @@
          <span class="s1 change-span">${spanName1}：</span>
                 <div class="form-group margin-bottom" style="padding-top: 1%">
                     <input type="text" class="form-control ${startTime}" id="${startTime}" value name="${startTime}"
-                           placeholder="${placeholder1}" <#if needCheck == true>check-type="${checkType}" required-message="${requiredMessage1}"</#if> >
+                           placeholder="${placeholder1}" <#if needCheck == "true">check-type="${checkType}" required-message="${requiredMessage1}"</#if> >
                 </div>
 
          <span class="s1 change-span">${spanName2}：</span>
                 <div class="form-group margin-bottom" style="padding-top: 1%">
                     <input type="text" class="form-control ${endTime}" id="${endTime}" value name="${endTime}"
-                           placeholder="${placeholder2}" <#if needCheck == true>check-type="${checkType}" required-message="${requiredMessage2}"</#if> >
+                           placeholder="${placeholder2}" <#if needCheck == "true">check-type="${checkType}" required-message="${requiredMessage2}"</#if> >
                 </div>
         ]]>
     </content>

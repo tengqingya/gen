@@ -106,6 +106,8 @@ public class debug {
         DatepickerHtmlModel datepickerHtmlModel =new DatepickerHtmlModel();
         datepickerHtmlModel.setPlaceholder1("开始时间");
         datepickerHtmlModel.setPlaceholder2("结束时间");
+        //如果是boolean 则判断的时候使用<#if needCheck == true>check-type="${checkType}" required-message="${requiredMessage1}"</#if>
+        //如果是string 则判断的时候使用<#if needCheck == "true">check-type="${checkType}" required-message="${requiredMessage1}"</#if>
         datepickerHtmlModel.setNeedCheck(false);
         datepickerHtmlModel.setCheckType("required date");
         datepickerHtmlModel.setRequiredMessage1("请选择开始时间");

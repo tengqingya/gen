@@ -18,4 +18,6 @@ public interface AdapteeInterface<T> {
     void checkbox( List<T> list,String fileName );
 
     void radio( List<T> list,String fileName );
+
+    void datepicker( List<T> list,String fileName );
 }

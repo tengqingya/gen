@@ -44,6 +44,21 @@ var fileUpload = {
 	'<button class="btn btn-primary applic_btn J_add" style="float: right">添加</button>' +
 	'</td>' +
 	'</tr>',
+	tmplateFordatepicker:'<tr style="background: #f9f9f9" class="config_tr config_datepicker">' +
+	'<td colspan="4">' +
+	'<i style="float: left">datepicker配置</i>' +
+	'<input type="text" class="form-control datepicker" name="placeholder1" placeholder="placeholder1" style="width: 5%;float: left;">' +
+	'<input type="text" class="form-control datepicker" name="requiredMessage1" placeholder="requiredMessage1" style="width: 5%;float: left">' +
+	'<input type="text" class="form-control datepicker" name="placeholder2" placeholder="placeholder2" style="width: 5%;float: left">' +
+	'<input type="text" class="form-control datepicker" name="requiredMessage2" placeholder="requiredMessage2" style="width: 5%;float: left">' +
+	'<input type="text" class="form-control datepicker" name="spanName1" placeholder="spanName1" style="width: 5%;float: left">' +
+	'<input type="text" class="form-control datepicker" name="spanName2" placeholder="spanName2" style="width: 5%;float: left">' +
+	'<input type="text" class="form-control datepicker" name="startTime" placeholder="startTime" style="width: 5%;float: left">' +
+	'<input type="text" class="form-control datepicker" name="endTime" placeholder="endTime" style="width: 5%;float: left">' +
+	'<input type="text" class="form-control datepicker" name="needCheck" placeholder="needCheck" style="width: 5%;float: left" value="false">' +
+	'<input type="text" class="form-control datepicker" name="checkType" placeholder="checkType" style="width: 5%;float: left" value="required">' +
+	'</td>' +
+	'</tr>',
 	bindEvents : function() {
 		$(".formValidate").validation();
 		var flag = 1;
@@ -145,10 +160,6 @@ var fileUpload = {
 
 						//解析bean
 						var obj = JSON.parse(filePaths.autoBeanModel);
-						console.log(JSON.parse(filePaths.autoBeanModel).fieldType[0]);
-						console.log(JSON.parse(filePaths.autoBeanModel).fieldType);
-						console.log(JSON.parse(filePaths.autoBeanModel).fieldTable);
-						console.log(JSON.parse(filePaths.autoBeanModel).fieldName);
 
 						$("#example").css("display","");
 						for(var i=0;i<obj.fieldType.length;i++){
@@ -238,6 +249,8 @@ var fileUpload = {
 								$(j).after(fileUpload.tmplateForcheckbox);
 							}else if(text == "radio"){
 								$(j).after(fileUpload.tmplateForradio);
+							}else if(text == "datepicker"){
+								$(j).after(fileUpload.tmplateFordatepicker);
 							}
 							return false;
 						}
@@ -265,6 +278,7 @@ var fileUpload = {
 		$(".J_genTemplate").click(function(){
 			var arr = [],json={},
 				subArrButton = [],
+				subArrDatepicker = [],
 				subArrCheckbox = [],
 				subArrRadio = [];
 			var ssubArrCheckbox = [],ssubArrRadio = [];
@@ -304,6 +318,13 @@ var fileUpload = {
 						ssubArrRadio = [];
 						subArrRadio.push(ssubjson);
 					}
+				}else if($(j).hasClass("config_datepicker")){
+					var subJson={};
+					$(j).find("input").each(function(l,m){
+						subJson[$(m).attr("name")] = $(m).val();
+					});
+					//如果push结束之后 改变subjson的值 那么之前push的值也会改变
+					subArrDatepicker.push(subJson);
 				}
 			});
 			//$('input[class="form-control button"]').each(function(i,j){
@@ -313,9 +334,7 @@ var fileUpload = {
 			json.button = subArrButton;
 			json.checkbox = subArrCheckbox;
 			json.radio = subArrRadio;
-			//console.log(subArr);
-			//console.log(json);
-			//arr.push(json);
+			json.datepicker = subArrDatepicker;
 
 			$.ajax({
 				type: "GET",

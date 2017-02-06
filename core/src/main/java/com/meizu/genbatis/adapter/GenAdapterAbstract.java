@@ -10,6 +10,7 @@ import com.meizu.genbatis.adaptee.AdapteeInterface;
 import com.meizu.genbatis.model.HtmlTemplate;
 import com.meizu.genbatis.target.TargetGenInterface;
 import com.meizu.genbatis.util.FreeMarkers;
+import com.meizu.genbatis.util.ListUtil;
 import com.meizu.genbatis.util.XmlUtil;
 import org.apache.commons.lang.Validate;
 
@@ -59,8 +60,16 @@ public abstract class GenAdapterAbstract implements TargetGenInterface,AdapteeIn
         genTemplate(list,fileName);
     }
 
+    @Override
+    public void datepicker(List<JSONObject> list, String fileName ){
+        genTemplate(list,fileName);
+    }
+
     private void genTemplate( List<JSONObject> list, String fileName ) {
-        Validate.notEmpty(list, "集合非空");
+//        Validate.notEmpty(list, "集合非空");
+        if( ListUtil.isEmpty(list)){
+            return;
+        }
         HtmlTemplate template = XmlUtil.fileToObject("/template/html/" + fileName + ".xml", HtmlTemplate.class);
         String s;
         for( JSONObject o : list ) {
