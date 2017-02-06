@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017. tengqingya@meizu.com qq:475804848 dingding:taizhoujiangyan.
+  -->
+
+<template>
+    <name>datepicker</name>
+    <filePath>src/main/java/com/meizu/genbatis/tmp</filePath>
+    <fileName>${ClassName}.datepicker</fileName>
+    <content>
+        <![CDATA[
+        //简易时间控件初始化
+        util.datePickerInit("${startTime}", "minDate", "${endTime}");
+        util.datePickerInit("${endTime}", "maxDate", "${startTime}");
+        //详细时间控件初始化
+        util.initDatetimeDetail($("#${startTime}"), "minDate", $("#${endTime}"));
+        util.initDatetimeDetail($("#${endTime}"), "maxDate", $("#${startTime}"));
+
+        //与valid联合使用
+        //新增的modal狂中的时间控件应该 这样
+        $("#modifyForm").on("focus","#${startTime}",function(){
+            $("#ui-datepicker-div").find("td,button").click(function(){
+                $("#${startTime}").blur();
+            });
+
+            $("#ui-datepicker-div").on("click", ".ui-datepicker-close", function(){
+                $("#${startTime}").blur();
+            });
+        });
+        ]]>
+    </content>
+</template>

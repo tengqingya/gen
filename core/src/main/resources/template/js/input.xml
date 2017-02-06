@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017. tengqingya@meizu.com qq:475804848 dingding:taizhoujiangyan.
+  -->
+
+<template>
+    <name>input</name>
+    <filePath>src/main/java/com/meizu/genbatis/tmp</filePath>
+    <fileName>${ClassName}.input</fileName>
+    <content>
+        <![CDATA[
+        //获取值
+        $('input[name="bookName"]').val()
+        //不可点击/恢复点击
+        $("#bookName").removeAttr("disabled");
+        $("#bookName").attr("disabled", "disabled");
+        ]]>
+
+
+        //正则
+        if (!/^[1-9]\d*$/.test(bookId)) {
+        asyncbox.alert("bookId只能输入大于0的整数", "提示");
+        return false;
+        }
+
+        if ( !/^[1-9]\d{0,2}$/.test($("#days").val())) {
+        asyncbox.alert("请输入禁言天数，只能输入1到3位的整数", "提示");
+        return false;
+        }
+    </content>
+</template>

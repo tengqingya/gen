@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017. tengqingya@meizu.com qq:475804848 dingding:taizhoujiangyan.
+  -->
+
+<template>
+    <name>fileupload</name>
+    <filePath>src/main/java/com/meizu/genbatis/tmp</filePath>
+    <fileName>${ClassName}.fileupload</fileName>
+    <content>
+        <![CDATA[
+        //上传图片
+        util.uploadFile('${id}',self.completeCover);
+
+        //封面
+    completeCover:function(data){
+        var json = jQuery.parseJSON(data);
+        var imgUrl = json.value;
+        if (json.code == 200) {
+            $('.coverImg').attr("src",imgUrl);
+            $('input[name="coverUrl"]').val(imgUrl).attr('value',imgUrl).attr('title',imgUrl);
+            $('#coverHidden').attr('value',imgUrl);
+
+            $("#coverHidden").blur();
+        } else {
+            asyncbox.alert("上传失败，请重试", "提示");
+        }
+    },
+        ]]>
+    </content>
+</template>

@@ -13,19 +13,23 @@ import java.util.List;
  */
 public interface AdapteeInterface<T> {
 
-    void button( List<T> list ,String fileName);
+    void button( List<T> list ,String fileName,String prefix );
 
-    void checkbox( List<T> list,String fileName );
+    void checkbox( List<T> list,String fileName,String prefix );
 
-    void radio( List<T> list,String fileName );
+    void radio( List<T> list,String fileName ,String prefix);
 
-    void datepicker( List<T> list,String fileName );
+    void datepicker( List<T> list,String fileName,String prefix );
 
-    void dropdown( List<T> list,String fileName );
+    void dropdown( List<T> list,String fileName,String prefix );
 
-    void fileupload( List<T> list,String fileName );
+    void fileupload( List<T> list,String fileName,String prefix );
 
-    void input( List<T> list,String fileName );
+    void input( List<T> list,String fileName ,String prefix);
 
-    void modal( List<T> list,String fileName );
+    void modal( List<T> list,String fileName,String prefix );
+
+    void table( List<T> list,String fileName,String prefix );
+
+    void inserttablejs( List<T> list,String fileName,String prefix );
 }

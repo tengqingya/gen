@@ -15,6 +15,7 @@ var fileUpload = {
 	'<input type="radio" name="#fieldName" class="radio-type"  value="6"/><lable for="#fieldName">fileupload</lable>' +
 	'<input type="radio" name="#fieldName" class="radio-type"  value="7"/><lable for="#fieldName">input</lable>' +
 	'<input type="radio" name="#fieldName" class="radio-type"  value="8"/><lable for="#fieldName">modal</lable>' +
+	'<input type="radio" name="#fieldName" class="radio-type"  value="8"/><lable for="#fieldName">table</lable>' +
 	'</td>' +
 	'</tr>',
 	tmplateForbutton:'<tr style="background: #f9f9f9" class="config_tr config_button">' +
@@ -94,6 +95,14 @@ var fileUpload = {
 	'<i style="float: left">modal配置</i>' +
 	'<input type="text" class="form-control" name="id" placeholder="id" style="width: 5%;float: left;" value="myModal">' +
 	'<input type="text" class="form-control" name="content" placeholder="content" style="width: 5%;float: left;" value="新增">' +
+	'</td>' +
+	'</tr>',
+	tmplateFortable:'<tr style="background: #f9f9f9" class="config_tr config_table">' +
+	'<td colspan="4">' +
+	'<i style="float: left">table配置</i>' +
+	'<input type="text" class="form-control" name="content" placeholder="content" style="width: 5%;float: left;" value="content">' +
+	'<input type="text" class="form-control" name="width" placeholder="width" style="width: 5%;float: left;" value="width">' +
+	'<button class="btn btn-primary applic_btn J_add" style="float: right">添加</button>' +
 	'</td>' +
 	'</tr>',
 	bindEvents : function() {
@@ -198,11 +207,18 @@ var fileUpload = {
 						//解析bean
 						var obj = JSON.parse(filePaths.autoBeanModel);
 
+						fieldName = {};
 						$("#example").css("display","");
 						for(var i=0;i<obj.fieldType.length;i++){
 							var tmp = fileUpload.tmplate.replace(/#fieldType/gi,obj.fieldType[i]).replace(/#fieldTable/gi,obj.fieldTable[i]).replace(/#fieldName/gi,obj.fieldName[i]);
+							fieldName[obj.fieldName[i]] = obj.fieldName[i];
 							$("#example").find("tbody").append(tmp);
 						}
+						parenFieldName= {};
+						parenFieldNameArr= [];
+						parenFieldName.columnNames = fieldName;
+						parenFieldName.jsName = "jsName";
+						parenFieldNameArr.push(parenFieldName);
 					}
 					else{
 						$('#progress .bar').text("生成失败！"+ data.result.message).css("color", "red");
@@ -296,6 +312,8 @@ var fileUpload = {
 								$(j).after(fileUpload.tmplateForinput);
 							}else if(text == "modal"){
 								$(j).after(fileUpload.tmplateFormodal);
+							}else if(text == "table"){
+								$(j).after(fileUpload.tmplateFortable);
 							}
 							return false;
 						}
@@ -320,6 +338,23 @@ var fileUpload = {
 			}
 		});
 
+		//生成tablefield字段
+		$(".J_genTemplate2").click(function(){
+			console.log(parenFieldNameArr);
+			$.ajax({
+				type: "GET",
+				url: "/manage/genHtml",
+				data: {"config":JSON.stringify({"inserttablejs":parenFieldNameArr})},
+				success: function (result) {
+					if (result.code == 200 && result.value) {
+						asyncbox.alert("添加成功", "提示");
+					} else {
+						asyncbox.alert("添加失败" + (result.message == "" ? result.message : ("：" + result.message)), "提示");
+					}
+				}
+			})
+		});
+
 		$(".J_genTemplate").click(function(){
 			var arr = [],json={},
 				subArrButton = [],
@@ -327,10 +362,11 @@ var fileUpload = {
 				subArrFileupload = [],
 				subArrInput = [],
 				subArrModal = [],
+				subArrTable = [],
 				subArrDropdown = [],
 				subArrCheckbox = [],
 				subArrRadio = [];
-			var ssubArrCheckbox = [],ssubArrRadio = [];
+			var ssubArrCheckbox = [],ssubArrRadio = [],ssubArrTable=[];
 			$(".config_tr").each(function(i,j){
 				if($(j).hasClass("config_button")){
 					var subJson={};
@@ -399,6 +435,19 @@ var fileUpload = {
 						subJson[$(m).attr("name")] = $(m).val();
 					});
 					subArrModal.push(subJson);
+				}else if($(j).hasClass("config_table")){
+					var subJson={};
+					var ssubjson = {};
+					$(j).find("input").each(function(l,m){
+						subJson[$(m).attr("name")] = $(m).val();
+					});
+					ssubArrTable.push(subJson);
+					if(!$(j).next().hasClass("config_table")){
+						ssubjson.id = "table";
+						ssubjson.tableList = ssubArrTable;
+						ssubArrTable = [];
+						subArrTable.push(ssubjson);
+					}
 				}
 			});
 			//$('input[class="form-control button"]').each(function(i,j){
@@ -413,6 +462,7 @@ var fileUpload = {
 			json.fileupload = subArrFileupload;
 			json.input = subArrInput;
 			json.modal = subArrModal;
+			json.table = subArrTable;
 
 			$.ajax({
 				type: "GET",

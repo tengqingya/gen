@@ -16,7 +16,7 @@ When you want to test if x > 0 or x >= 0, writing <#if x > 0> and <#if x >= 0> i
                 <thead>
                 <tr>
                 <#list tableList as l>
-                <th<#if l.width gt 0> style="width: ${l.width}%"</#if>>${l.content}</th>
+                <th<#if l.width !="0" && l.width !=""> style="width: ${l.width}%"</#if>>${l.content}</th>
                 </#list>
                 </tr>
                 </thead>

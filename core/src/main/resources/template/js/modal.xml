@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017. tengqingya@meizu.com qq:475804848 dingding:taizhoujiangyan.
+  -->
+
+<template>
+    <name>modal</name>
+    <filePath>src/main/java/com/meizu/genbatis/tmp</filePath>
+    <fileName>${ClassName}.modal</fileName>
+    <content>
+        <![CDATA[
+        //show/hide modal ，change title ，fill content
+            $('.modal-body').html($("#modeDialog").tmpl(
+            //回显
+            {"title":title,"resourceId":resourceId}
+            ));
+            $('#myModalLabel').text("新增首页栏目或者广告位");
+            $("#${id}").modal('show');
+            $("#${id}").modal('hide');
+        //modal Template javascript
+        <script id="modeDialog" type="text/x-jquery-tmpl">
+        <form id="modifyForm">
+          <div class="modify">
+          <table cellspacing="0" width="100%" class="modifyTable">
+            <input type="hidden" id="id" value="" />
+            <tr id="type">
+                <th>类型：</th>
+                <td>
+                </td>
+            </tr>
+          </table>
+          </div>
+          </form>
+        </script>
+
+        ]]>
+    </content>
+</template>

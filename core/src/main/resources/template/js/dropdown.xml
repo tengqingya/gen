@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017. tengqingya@meizu.com qq:475804848 dingding:taizhoujiangyan.
+  -->
+<!--
+
+'<li role="presentation">',
+                '<a role="menuitem" tabindex="-1" href="javascript:void(0);" ',
+                attrHtml.join(''), ' value="',
+                item.value, '">', item.text, '</a>',
+                '</li>'].join(''));
+                item.value:"id",name:"name"中id的值
+                item.text:"id",name:"name"中name的值
+-->
+<template>
+    <name>dropdown</name>
+    <filePath>src/main/java/com/meizu/genbatis/tmp</filePath>
+    <fileName>${ClassName}.dropdown</fileName>
+    <content>
+        <![CDATA[
+        //点击第一个下拉框
+        $(".dropdown_${id}_list").children().eq(0).find("a").trigger("click");
+        //点击某个下拉框
+        $('a[role="menuitem"][value="' + selected + '"]', $(".dropdown_${id}_list")).trigger('click');
+        //初始化枚举类型下拉框
+        manageUtil.initEnumSelect($(".dropdown_${id}_list"), -1, function () {
+            //valid
+            $("#${id}").blur();
+        });
+        //初始化ajax类型下拉框
+        manageUtil.initAjaxSelect($(".dropdown_${id}_list"),
+                {url:"",id:"id",name:"name",onSelect:function(a){
+                    //为什么每次都获取 上一次的值?因为在回调方法里面 是先执行回调方法 再 赋值  应 先 赋值  再回调
+                    //valid
+                    $("#${id}").blur();
+                },param:{status:1,type:$(a).attr("value")}}
+            );
+        ]]>
+    </content>
+</template>
