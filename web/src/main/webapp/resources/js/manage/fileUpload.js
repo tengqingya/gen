@@ -59,6 +59,19 @@ var fileUpload = {
 	'<input type="text" class="form-control datepicker" name="checkType" placeholder="checkType" style="width: 5%;float: left" value="required">' +
 	'</td>' +
 	'</tr>',
+	tmplateFordropdown:'<tr style="background: #f9f9f9" class="config_tr config_dropdown">' +
+	'<td colspan="4">' +
+	'<i style="float: left">datepicker配置</i>' +
+	'<input type="text" class="form-control datepicker" name="data_enum" placeholder="data_enum" style="width: 5%;float: left;">' +
+	'<input type="text" class="form-control datepicker" name="data_sel_all" placeholder="data_sel_all" style="width: 5%;float: left" value="true">' +
+	'<input type="text" class="form-control datepicker" name="data_result_in" placeholder="data_result_in" style="width: 5%;float: left" value="value">' +
+	'<input type="text" class="form-control datepicker" name="id" placeholder="id" style="width: 5%;float: left">' +
+	'<input type="text" class="form-control datepicker" name="spanName" placeholder="spanName" style="width: 5%;float: left" value="下拉框">' +
+	'<input type="text" class="form-control datepicker" name="needCheck" placeholder="needCheck" style="width: 5%;float: left" value="false">' +
+	'<input type="text" class="form-control datepicker" name="checkType" placeholder="checkType" style="width: 5%;float: left" value="required">' +
+	'<input type="text" class="form-control datepicker" name="requiredMessage" placeholder="requiredMessage" style="width: 5%;float: left" value="requiredMessage">' +
+	'</td>' +
+	'</tr>',
 	bindEvents : function() {
 		$(".formValidate").validation();
 		var flag = 1;
@@ -251,6 +264,8 @@ var fileUpload = {
 								$(j).after(fileUpload.tmplateForradio);
 							}else if(text == "datepicker"){
 								$(j).after(fileUpload.tmplateFordatepicker);
+							}else if(text == "dropdown"){
+								$(j).after(fileUpload.tmplateFordropdown);
 							}
 							return false;
 						}
@@ -279,6 +294,7 @@ var fileUpload = {
 			var arr = [],json={},
 				subArrButton = [],
 				subArrDatepicker = [],
+				subArrDropdown = [],
 				subArrCheckbox = [],
 				subArrRadio = [];
 			var ssubArrCheckbox = [],ssubArrRadio = [];
@@ -325,6 +341,13 @@ var fileUpload = {
 					});
 					//如果push结束之后 改变subjson的值 那么之前push的值也会改变
 					subArrDatepicker.push(subJson);
+				}else if($(j).hasClass("config_dropdown")){
+					var subJson={};
+					$(j).find("input").each(function(l,m){
+						subJson[$(m).attr("name")] = $(m).val();
+					});
+					//如果push结束之后 改变subjson的值 那么之前push的值也会改变
+					subArrDropdown.push(subJson);
 				}
 			});
 			//$('input[class="form-control button"]').each(function(i,j){
@@ -335,6 +358,7 @@ var fileUpload = {
 			json.checkbox = subArrCheckbox;
 			json.radio = subArrRadio;
 			json.datepicker = subArrDatepicker;
+			json.dropdown = subArrDropdown;
 
 			$.ajax({
 				type: "GET",

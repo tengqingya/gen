@@ -65,6 +65,11 @@ public abstract class GenAdapterAbstract implements TargetGenInterface,AdapteeIn
         genTemplate(list,fileName);
     }
 
+    @Override
+    public void dropdown(List<JSONObject> list, String fileName ){
+        genTemplate(list,fileName);
+    }
+
     private void genTemplate( List<JSONObject> list, String fileName ) {
 //        Validate.notEmpty(list, "集合非空");
         if( ListUtil.isEmpty(list)){

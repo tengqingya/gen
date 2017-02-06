@@ -20,4 +20,6 @@ public interface AdapteeInterface<T> {
     void radio( List<T> list,String fileName );
 
     void datepicker( List<T> list,String fileName );
+
+    void dropdown( List<T> list,String fileName );
 }
