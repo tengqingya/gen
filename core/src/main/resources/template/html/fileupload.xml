@@ -11,7 +11,7 @@
         <![CDATA[
          <div class="modal4-img">
                             <div class="bookImg">
-                                <img src="/resources/node-ebook-manage/images/common/images/u93.png" class="imgLeft coverImg">
+                                <img src="/resources/node-ebook-manage/images/common/images/u93.png" class="imgLeft ${id}">
                                 <div class="imgDiv">
                                     <div class="book-input form-group">
                                         <span>图片地址：</span><input type="text" name="coverUrl" class="form-control coverUrl" disabled="disabled" value="{{= image}}" check-type="required" required-message="请上传一个图片">

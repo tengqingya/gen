@@ -62,19 +62,31 @@ var fileUpload = {
 	tmplateFordropdown:'<tr style="background: #f9f9f9" class="config_tr config_dropdown">' +
 	'<td colspan="4">' +
 	'<i style="float: left">datepicker配置</i>' +
-	'<input type="text" class="form-control datepicker" name="data_enum" placeholder="data_enum" style="width: 5%;float: left;">' +
-	'<input type="text" class="form-control datepicker" name="data_sel_all" placeholder="data_sel_all" style="width: 5%;float: left" value="true">' +
-	'<input type="text" class="form-control datepicker" name="data_result_in" placeholder="data_result_in" style="width: 5%;float: left" value="value">' +
-	'<input type="text" class="form-control datepicker" name="id" placeholder="id" style="width: 5%;float: left">' +
-	'<input type="text" class="form-control datepicker" name="spanName" placeholder="spanName" style="width: 5%;float: left" value="下拉框">' +
-	'<input type="text" class="form-control datepicker" name="needCheck" placeholder="needCheck" style="width: 5%;float: left" value="false">' +
-	'<input type="text" class="form-control datepicker" name="checkType" placeholder="checkType" style="width: 5%;float: left" value="required">' +
-	'<input type="text" class="form-control datepicker" name="requiredMessage" placeholder="requiredMessage" style="width: 5%;float: left" value="requiredMessage">' +
+	'<input type="text" class="form-control dropdown" name="data_enum" placeholder="data_enum" style="width: 5%;float: left;">' +
+	'<input type="text" class="form-control dropdown" name="data_sel_all" placeholder="data_sel_all" style="width: 5%;float: left" value="true">' +
+	'<input type="text" class="form-control dropdown" name="data_result_in" placeholder="data_result_in" style="width: 5%;float: left" value="value">' +
+	'<input type="text" class="form-control dropdown" name="id" placeholder="id" style="width: 5%;float: left">' +
+	'<input type="text" class="form-control dropdown" name="spanName" placeholder="spanName" style="width: 5%;float: left" value="下拉框">' +
+	'<input type="text" class="form-control dropdown" name="needCheck" placeholder="needCheck" style="width: 5%;float: left" value="false">' +
+	'<input type="text" class="form-control dropdown" name="checkType" placeholder="checkType" style="width: 5%;float: left" value="required">' +
+	'<input type="text" class="form-control dropdown" name="requiredMessage" placeholder="requiredMessage" style="width: 5%;float: left" value="requiredMessage">' +
 	'</td>' +
 	'</tr>',
 	tmplateForfileupload:'<tr style="background: #f9f9f9" class="config_tr config_fileupload">' +
 	'<td colspan="4">' +
 	'<i style="float: left">fileupload配置</i>' +
+	'<input type="text" class="form-control fileupload" name="id" placeholder="id" style="width: 5%;float: left;" value="coverImg">' +
+	'</td>' +
+	'</tr>',
+	tmplateForinput:'<tr style="background: #f9f9f9" class="config_tr config_input">' +
+	'<td colspan="4">' +
+	'<i style="float: left">input配置</i>' +
+	'<input type="text" class="form-control input" name="id" placeholder="id" style="width: 5%;float: left;">' +
+	'<input type="text" class="form-control input" name="spanName" placeholder="spanName" style="width: 5%;float: left;">' +
+	'<input type="text" class="form-control input" name="placeholder" placeholder="placeholder" style="width: 5%;float: left;">' +
+	'<input type="text" class="form-control input" name="needCheck" placeholder="needCheck" style="width: 5%;float: left" value="false">' +
+	'<input type="text" class="form-control input" name="checkType" placeholder="checkType" style="width: 5%;float: left" value="required">' +
+	'<input type="text" class="form-control input" name="requiredMessage" placeholder="requiredMessage" style="width: 5%;float: left" value="requiredMessage">' +
 	'</td>' +
 	'</tr>',
 	bindEvents : function() {
@@ -273,6 +285,8 @@ var fileUpload = {
 								$(j).after(fileUpload.tmplateFordropdown);
 							}else if(text == "fileupload"){
 								$(j).after(fileUpload.tmplateForfileupload);
+							}else if(text == "input"){
+								$(j).after(fileUpload.tmplateForinput);
 							}
 							return false;
 						}
@@ -302,6 +316,7 @@ var fileUpload = {
 				subArrButton = [],
 				subArrDatepicker = [],
 				subArrFileupload = [],
+				subArrInput = [],
 				subArrDropdown = [],
 				subArrCheckbox = [],
 				subArrRadio = [];
@@ -361,8 +376,13 @@ var fileUpload = {
 					$(j).find("input").each(function(l,m){
 						subJson[$(m).attr("name")] = $(m).val();
 					});
-					//如果push结束之后 改变subjson的值 那么之前push的值也会改变
 					subArrFileupload.push(subJson);
+				}else if($(j).hasClass("config_input")){
+					var subJson={};
+					$(j).find("input").each(function(l,m){
+						subJson[$(m).attr("name")] = $(m).val();
+					});
+					subArrInput.push(subJson);
 				}
 			});
 			//$('input[class="form-control button"]').each(function(i,j){
@@ -375,6 +395,7 @@ var fileUpload = {
 			json.datepicker = subArrDatepicker;
 			json.dropdown = subArrDropdown;
 			json.fileupload = subArrFileupload;
+			json.input = subArrInput;
 
 			$.ajax({
 				type: "GET",

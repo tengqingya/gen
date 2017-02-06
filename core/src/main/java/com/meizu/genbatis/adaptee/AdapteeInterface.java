@@ -24,4 +24,6 @@ public interface AdapteeInterface<T> {
     void dropdown( List<T> list,String fileName );
 
     void fileupload( List<T> list,String fileName );
+
+    void input( List<T> list,String fileName );
 }

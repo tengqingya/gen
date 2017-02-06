@@ -72,7 +72,11 @@ public abstract class GenAdapterAbstract implements TargetGenInterface,AdapteeIn
 
     @Override
     public void fileupload(List<JSONObject> list, String fileName ){
-        list.add(new JSONObject());
+        genTemplate(list,fileName);
+    }
+
+    @Override
+    public void input(List<JSONObject> list, String fileName ){
         genTemplate(list,fileName);
     }
 
