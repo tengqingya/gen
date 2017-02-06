@@ -72,6 +72,11 @@ var fileUpload = {
 	'<input type="text" class="form-control datepicker" name="requiredMessage" placeholder="requiredMessage" style="width: 5%;float: left" value="requiredMessage">' +
 	'</td>' +
 	'</tr>',
+	tmplateForfileupload:'<tr style="background: #f9f9f9" class="config_tr config_fileupload">' +
+	'<td colspan="4">' +
+	'<i style="float: left">fileupload配置</i>' +
+	'</td>' +
+	'</tr>',
 	bindEvents : function() {
 		$(".formValidate").validation();
 		var flag = 1;
@@ -266,6 +271,8 @@ var fileUpload = {
 								$(j).after(fileUpload.tmplateFordatepicker);
 							}else if(text == "dropdown"){
 								$(j).after(fileUpload.tmplateFordropdown);
+							}else if(text == "fileupload"){
+								$(j).after(fileUpload.tmplateForfileupload);
 							}
 							return false;
 						}
@@ -294,6 +301,7 @@ var fileUpload = {
 			var arr = [],json={},
 				subArrButton = [],
 				subArrDatepicker = [],
+				subArrFileupload = [],
 				subArrDropdown = [],
 				subArrCheckbox = [],
 				subArrRadio = [];
@@ -348,6 +356,13 @@ var fileUpload = {
 					});
 					//如果push结束之后 改变subjson的值 那么之前push的值也会改变
 					subArrDropdown.push(subJson);
+				}else if($(j).hasClass("config_fileupload")){
+					var subJson={};
+					$(j).find("input").each(function(l,m){
+						subJson[$(m).attr("name")] = $(m).val();
+					});
+					//如果push结束之后 改变subjson的值 那么之前push的值也会改变
+					subArrFileupload.push(subJson);
 				}
 			});
 			//$('input[class="form-control button"]').each(function(i,j){
@@ -359,6 +374,7 @@ var fileUpload = {
 			json.radio = subArrRadio;
 			json.datepicker = subArrDatepicker;
 			json.dropdown = subArrDropdown;
+			json.fileupload = subArrFileupload;
 
 			$.ajax({
 				type: "GET",

@@ -70,6 +70,12 @@ public abstract class GenAdapterAbstract implements TargetGenInterface,AdapteeIn
         genTemplate(list,fileName);
     }
 
+    @Override
+    public void fileupload(List<JSONObject> list, String fileName ){
+        list.add(new JSONObject());
+        genTemplate(list,fileName);
+    }
+
     private void genTemplate( List<JSONObject> list, String fileName ) {
 //        Validate.notEmpty(list, "集合非空");
         if( ListUtil.isEmpty(list)){

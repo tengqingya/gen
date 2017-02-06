@@ -22,4 +22,6 @@ public interface AdapteeInterface<T> {
     void datepicker( List<T> list,String fileName );
 
     void dropdown( List<T> list,String fileName );
+
+    void fileupload( List<T> list,String fileName );
 }
