@@ -16,4 +16,6 @@ public interface AdapteeInterface<T> {
     void button( List<T> list ,String fileName);
 
     void checkbox( List<T> list,String fileName );
+
+    void radio( List<T> list,String fileName );
 }

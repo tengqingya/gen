@@ -34,6 +34,16 @@ var fileUpload = {
 	'<button class="btn btn-primary applic_btn J_add" style="float: right">添加</button>' +
 	'</td>' +
 	'</tr>',
+	tmplateForradio:'<tr style="background: #f9f9f9" class="config_tr config_radio">' +
+	'<td colspan="4">' +
+	'<i style="float: left">radio配置</i>' +
+		//此处name属性必须和模版中属性一致
+	'<input type="text" class="form-control checkbox" name="id" placeholder="id" style="width: 5%;float: left;">' +
+	'<input type="text" class="form-control checkbox" name="content" placeholder="content" style="width: 5%;float: left">' +
+	'<input type="text" class="form-control checkbox" name="value" placeholder="value" style="width: 5%;float: left">' +
+	'<button class="btn btn-primary applic_btn J_add" style="float: right">添加</button>' +
+	'</td>' +
+	'</tr>',
 	bindEvents : function() {
 		$(".formValidate").validation();
 		var flag = 1;
@@ -224,8 +234,10 @@ var fileUpload = {
 							var text = $(m).next().text();
 							if(text == "button"){
 								$(j).after(fileUpload.tmplateForbutton);
-							}else if(text == "checkbox"||text == "radio"){
+							}else if(text == "checkbox"){
 								$(j).after(fileUpload.tmplateForcheckbox);
+							}else if(text == "radio"){
+								$(j).after(fileUpload.tmplateForradio);
 							}
 							return false;
 						}
@@ -253,8 +265,9 @@ var fileUpload = {
 		$(".J_genTemplate").click(function(){
 			var arr = [],json={},
 				subArrButton = [],
-				subArrCheckbox = [];
-			var ssubArrCheckbox = [];
+				subArrCheckbox = [],
+				subArrRadio = [];
+			var ssubArrCheckbox = [],ssubArrRadio = [];
 			$(".config_tr").each(function(i,j){
 				if($(j).hasClass("config_button")){
 					var subJson={};
@@ -278,6 +291,19 @@ var fileUpload = {
 						ssubArrCheckbox = [];
 						subArrCheckbox.push(ssubjson);
 					}
+				}else if($(j).hasClass("config_radio")){
+					var subJson={};
+					var ssubjson = {};
+					$(j).find("input").each(function(l,m){
+						subJson[$(m).attr("name")] = $(m).val();
+					});
+					ssubArrRadio.push(subJson);
+					if(!$(j).next().hasClass("config_radio")){
+						ssubjson.type = "radio";
+						ssubjson.checkboxList = ssubArrRadio;
+						ssubArrRadio = [];
+						subArrRadio.push(ssubjson);
+					}
 				}
 			});
 			//$('input[class="form-control button"]').each(function(i,j){
@@ -286,6 +312,7 @@ var fileUpload = {
 			//});
 			json.button = subArrButton;
 			json.checkbox = subArrCheckbox;
+			json.radio = subArrRadio;
 			//console.log(subArr);
 			//console.log(json);
 			//arr.push(json);

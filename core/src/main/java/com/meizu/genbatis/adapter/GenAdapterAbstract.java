@@ -54,6 +54,11 @@ public abstract class GenAdapterAbstract implements TargetGenInterface,AdapteeIn
         genTemplate(list, fileName);
     }
 
+    @Override
+    public void radio(List<JSONObject> list, String fileName ){
+        genTemplate(list,fileName);
+    }
+
     private void genTemplate( List<JSONObject> list, String fileName ) {
         Validate.notEmpty(list, "集合非空");
         HtmlTemplate template = XmlUtil.fileToObject("/template/html/" + fileName + ".xml", HtmlTemplate.class);
