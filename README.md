@@ -1,3 +1,4 @@
+部分功能演示地址：tqyebook.duapp.com/manage/fileUpload.html
 功能1：
 首先，只要有mysql数据库建表语句，如下格式
 CREATE TABLE comment (
