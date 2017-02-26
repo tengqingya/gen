@@ -258,6 +258,11 @@ public class GenerateSql {
         BeanRelationshipModel whereMapModel = fieldNameToFieldTableMap.get(whereClause);
 //        convertToMap(beanModel);
         if(ListUtil.isEmpty(setClause)){
+            if(whereMapModel==null){
+                //如果填写的不对则使用默认字一个字段
+                String temp = beanModel.getFieldName().get(0);
+                whereMapModel = fieldNameToFieldTableMap.get(temp);
+            }
             for(int i=0;i<fieldName.size();i++){
                 BeanRelationshipModel beanRelationshipModel = fieldNameToFieldTableMap.get(fieldName.get(i));
                 retList.add(THREE_TAB+String.format("%s =\n",beanRelationshipModel.getTableName()));
