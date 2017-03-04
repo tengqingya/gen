@@ -34,6 +34,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
 
 /**
@@ -53,7 +54,17 @@ public class GenTemplateController {
     @ResponseBody
     public ResultModel genHtmlTemplate(String config){
         Assert.notNull(config);
-        targetGenInterface.genTemplate(config);
+        try {
+            targetGenInterface.genTemplate(config);
+        } catch( NoSuchMethodException e ) {
+            e.printStackTrace();
+        } catch( InvocationTargetException e ) {
+            e.printStackTrace();
+        } catch( IllegalAccessException e ) {
+            e.printStackTrace();
+        } catch( InstantiationException e ) {
+            e.printStackTrace();
+        }
 //        ApplicationContext applicationContext = SpringContextHolder.getApplicationContext();
 //        System.out.println("applicationContext"+applicationContext);
 //        TestService testService = (TestService)SpringContextHolder.getBean("testService");

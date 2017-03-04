@@ -59,6 +59,27 @@
         </dependency>
         <!-- SPRING end -->
 
+        <!--http -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jodd</groupId>
+            <artifactId>jodd-http</artifactId>
+            <version>3.7</version>
+        </dependency>
+        <!--http -->
+
+        <!--邮件-->
+        <!--邮件-->
+
         <!-- freemarker engine -->
         <dependency>
             <groupId>org.freemarker</groupId>
@@ -82,6 +103,15 @@
             <artifactId>spring-context</artifactId>
             <version>4.3.4.RELEASE</version>
         </dependency>
+
+        <!--邮件-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>4.3.4.RELEASE</version>
+        </dependency>
+        <!--邮件-->
+
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>

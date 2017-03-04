@@ -9,7 +9,7 @@
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 
-    <context:component-scan base-package="com.meizu.tqy.action,com.meizu.tqy.filter,com.meizu.genbatis.service,com.meizu.genbatis.parser,com.meizu.tqy.handler"></context:component-scan>
+    <context:component-scan base-package="com.meizu.tqy.action,com.meizu.tqy.filter,com.meizu.genbatis.service,com.meizu.genbatis.parser,com.meizu.tqy.handler,com.meizu.tqy.service"></context:component-scan>
 
 
 
@@ -68,4 +68,21 @@
         <beans:property name="maxInMemorySize" value="10240" />
     </beans:bean>
 
+
+    <!--邮件服务-->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="" />
+        <property name="username" value="" />
+        <property name="password" value="" />
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">false</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="mailEngine" class="com.meizu.tqy.util.MailEngine">
+        <property name="mailSender" ref="mailSender" />
+    </bean>
+    <!--邮件服务-->
 </beans>
