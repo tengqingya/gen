@@ -195,7 +195,7 @@ public class GenerateSql {
         retList.add(TWO_TAB+"<where>\n");
         createSelectAndCountIfStatment(retList, fieldTable, fieldName, fieldType, abbreviation,selectAndCountPrefix);
         retList.add(TWO_TAB+"</where>\n");
-        retList.add(TWO_TAB+"LIMIT #{"+selectAndCountPrefix+"start},#{"+selectAndCountPrefix+".length}\n");
+        retList.add(TWO_TAB+"LIMIT #{"+selectAndCountPrefix+"start},#{"+selectAndCountPrefix+"length}\n");
         retList.add(ONE_TAB+"</select>\n");
         return retList;
     }
