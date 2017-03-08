@@ -20,10 +20,10 @@
                         <ul class="dropdown-menu dropdown_${id}_list" id="${id}_list"
                             role="menu" data-enum="${data_enum}" data-sel-all="${data_sel_all}" data-result-in="${data_result_in}">
                         </ul>
+                     </div>
                     <div class="form-group">
                         <input type="hidden" value name="${id}" id="${id}" <#if needCheck == "true">check-type="${checkType}" required-message="${requiredMessage}"</#if>/>
                     </div>
-                   </div>
                 </div>
         ]]>
     </content>
