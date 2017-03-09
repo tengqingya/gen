@@ -19,13 +19,21 @@
         <#else>
         {name: "${key}", value: $('input[name="${key}"]').val()},
         </#if>
-
         </#list>
         ];
-        if($('input[name="startTime"]').val()){
+
+        var startTime = $('input[name="startTime"]').val();
+        var endTime = $('input[name="endTime"]').val();
+        if(!!startTime){
             argument.push({
                 name: "startTime",
-                value: parseInt($.datepicker.parseDateTime('yy-mm-dd', 'HH:mm:ss', $('input[name="startTime"]').val()).getTime() / 1000)
+                value: parseInt($.datepicker.parseDateTime('yy-mm-dd', 'HH:mm:ss', startTime).getTime() / 1000)
+            });
+        }
+        if(!!endTime){
+            argument.push({
+                name: "endTime",
+                value: parseInt($.datepicker.parseDateTime('yy-mm-dd', 'HH:mm:ss', endTime).getTime() / 1000)
             });
         }
 
