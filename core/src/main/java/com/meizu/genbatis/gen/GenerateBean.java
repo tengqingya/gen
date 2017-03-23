@@ -65,8 +65,9 @@ public class GenerateBean {
             String beanName;
             String modelBeanType;
             String paramBeanType;
-            if(s.toLowerCase().contains("not null")&&(s.toLowerCase().contains("comment ")||s.toLowerCase().contains("default ")||s.toLowerCase().contains("auto_increment"))){
+            if(s.toLowerCase().contains("not null")|| s.toLowerCase().contains("comment ")||s.toLowerCase().contains("default ")||s.toLowerCase().contains("auto_increment")){
                 //有备注/默认值的行才解析
+                //修改逻辑，只要有not null就行
                 String[] split = s.startsWith(" ")?s.substring(1).trim().split(" "):s.trim().split(" ");
                 if(split.length>1){
                     beanName = getBeanName(split[0],fieldTable,configBean);
@@ -168,6 +169,9 @@ public class GenerateBean {
             list.add(s.substring(1,s.length()-1));
             s=s.replace("'"+prefix,"");
             s=s.replace("'","");
+        }else {
+            //没有使用'等括号
+            list.add(s);
         }
         //有ID将I大写
         s=s.length()==2?s.toLowerCase():s.toLowerCase().replace("id","Id");
