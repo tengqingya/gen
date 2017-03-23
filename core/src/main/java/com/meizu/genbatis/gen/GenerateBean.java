@@ -54,20 +54,22 @@ public class GenerateBean {
 
         for(int i=0;i<readLines.size()-1;i++){
             s = readLines.get(i);
-            if(i==0 && (s.toLowerCase().contains("create table"))){
+            String beanName;
+            String modelBeanType;
+            String paramBeanType;
+            if (s.toLowerCase().contains("create table")){
                 modelName = getModelName(s,beanModel,configBean);
                 paramName = modelName.replace("Model","Param");
                 resultModel.append("public class "+modelName+" {\n");
                 resultParam.append("public class "+paramName+" {\n");
 
                 beanModel.setModelName(modelName);
-            }
-            String beanName;
-            String modelBeanType;
-            String paramBeanType;
-            if(s.toLowerCase().contains("not null")|| s.toLowerCase().contains("comment ")||s.toLowerCase().contains("default ")||s.toLowerCase().contains("auto_increment")){
+            }else
+            if(s.toLowerCase().contains("not null")|| (!s.toLowerCase().contains("engine")&&(s.toLowerCase().contains("comment")||s.toLowerCase().contains("default")||s.toLowerCase().contains("auto_increment")))){
                 //有备注/默认值的行才解析
                 //修改逻辑，只要有not null就行
+                //包含default comment auto_increment的时候必须不能有ENGINE
+                LOGGER.info(s);
                 String[] split = s.startsWith(" ")?s.substring(1).trim().split(" "):s.trim().split(" ");
                 if(split.length>1){
                     beanName = getBeanName(split[0],fieldTable,configBean);
@@ -120,7 +122,9 @@ public class GenerateBean {
     }
 
     private String getName( String original, String split ,int remain,AutoBeanModel beanModel ) {
-        String[] s = original.split(" ");
+        //fix:create table joys_user(
+
+        String[] s = original.replaceAll("\\(","").split(" ");
         //s1是table name
         String s1 = s[2];
         if(beanModel!=null){
@@ -149,40 +153,46 @@ public class GenerateBean {
         return lastIndexOf+1;
     }
 
-    private String getBeanName( String s ,String prefix,String split,List<String> list) {
-        if(s.length()<=1){
+    private String getBeanName( String s, String prefix, String split, List<String> list ) {
+        if( s.length() <= 1 ) {
             return null;
         }
         //去除''/""/``
         //去掉前缀
-        if(s.contains("`")){
-            list.add(s.substring(1,s.length()-1));
-            s=s.replace("`"+prefix,"");
-            s=s.replace("`","");
-        }
-        if(s.contains("\"")){
-            list.add(s.substring(1,s.length()-1));
-            s=s.replace("\""+prefix,"");
-            s=s.replace("\"","");
-        }
-        if(s.contains("'")){
-            list.add(s.substring(1,s.length()-1));
-            s=s.replace("'"+prefix,"");
-            s=s.replace("'","");
-        }else {
+        if( s.contains("`") ) {
+            list.add(s.substring(1, s.length() - 1));
+            s = s.replace("`" + prefix, "");
+            s = s.replace("`", "");
+        } else if( s.contains("\"") ) {
+            list.add(s.substring(1, s.length() - 1));
+            s = s.replace("\"" + prefix, "");
+            s = s.replace("\"", "");
+        } else if( s.contains("'") ) {
+            list.add(s.substring(1, s.length() - 1));
+            s = s.replace("'" + prefix, "");
+            s = s.replace("'", "");
+        } else {
             //没有使用'等括号
             list.add(s);
         }
         //有ID将I大写
-        s=s.length()==2?s.toLowerCase():s.toLowerCase().replace("id","Id");
+        s = s.length() == 2 ? s.toLowerCase() : s.toLowerCase().replace("id", "Id");
         //驼峰表达
-        s = getTuofeng(s,split,false);
+        s = getTuofeng(s, split, false);
         return s;
     }
 
     private String getTuofeng( String s, String split ,boolean firstNameBig) {
         while( s.contains(split) ){
-            s= s.contains(split)?s.replace(split+s.charAt(s.indexOf(split)+1),(s.charAt(s.indexOf(split)+1)+"").toUpperCase()):s;
+//            s= s.contains(split)?s.replace(split+s.charAt(s.indexOf(split)+1),(s.charAt(s.indexOf(split)+1)+"").toUpperCase()):s;
+            //fix:LOG_NR_
+            if(s.contains(split)){
+                if(s.indexOf(split)!=s.length()-1){
+                    s=s.replace(split+s.charAt(s.indexOf(split)+1),(s.charAt(s.indexOf(split)+1)+"").toUpperCase());
+                }else {
+                    s=s.replace(split,"");
+                }
+            }
         }
         String substring="";
         String substring1=s;
