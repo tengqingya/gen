@@ -1,4 +1,4 @@
-在线使用地址：[tqyebook.duapp.com/manage/fileUpload.html ](tqyebook.duapp.com/manage/fileUpload.html )
+在线使用地址：[DEMO](http://tqyebook.duapp.com/manage/fileUpload.html)
 
 演示demo：
 ![](https://p.pstatp.com/large/243a00025b19387225be)
