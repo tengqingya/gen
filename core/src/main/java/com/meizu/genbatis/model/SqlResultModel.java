@@ -10,6 +10,16 @@ public class SqlResultModel {
     private String sql;
     private String dao;
 
+    public String getService() {
+        return service;
+    }
+
+    public void setService( String service ) {
+        this.service = service;
+    }
+
+    private String service;
+
     public String getDao() {
         return dao;
     }

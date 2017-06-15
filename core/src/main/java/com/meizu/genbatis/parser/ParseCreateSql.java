@@ -5,6 +5,7 @@ import com.meizu.genbatis.exception.ErrorCode;
 import com.meizu.genbatis.exception.GenerateException;
 import com.meizu.genbatis.gen.GenerateBean;
 import com.meizu.genbatis.gen.GenerateDao;
+import com.meizu.genbatis.gen.GenerateService;
 import com.meizu.genbatis.gen.GenerateSql;
 import com.meizu.genbatis.model.AutoBeanModel;
 import com.meizu.genbatis.model.ConfigBean;
@@ -38,6 +39,9 @@ public class ParseCreateSql {
 
     @Autowired
     private GenerateDao generateDao;
+
+    @Autowired
+    private GenerateService generateService;
 
 //    @Value("${whereClause}")
 //    private  String whereClause;
@@ -155,10 +159,20 @@ public class ParseCreateSql {
             throw new GenerateException(ErrorCode.ServerDs.UNKOWN.getValue(), "生成dao错误", "");
         }
 
+        String service;
+        try {
+            service = generateService.createService(beanModel);
+        }catch(GenerateException g){
+            throw g;
+        }catch(Exception e){
+            throw new GenerateException(ErrorCode.ServerDs.UNKOWN.getValue(), "生成dao错误", "");
+        }
+
         sqlResultModel.setAutoBeanModel(beanModel);
         sqlResultModel.setModel((String)resultMap.get("model"));
         sqlResultModel.setParam((String)resultMap.get("param"));
         sqlResultModel.setSql(sb.toString());
+        sqlResultModel.setService(service);
         sqlResultModel.setDao(dao);
         //todo 加注释
         //todo 加Set
