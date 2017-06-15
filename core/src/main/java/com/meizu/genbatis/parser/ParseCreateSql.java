@@ -4,6 +4,9 @@ import com.google.common.base.Splitter;
 import com.meizu.genbatis.exception.ErrorCode;
 import com.meizu.genbatis.exception.GenerateException;
 import com.meizu.genbatis.gen.GenerateBean;
+import com.meizu.genbatis.gen.GenerateController;
+import com.meizu.genbatis.gen.GenerateDao;
+import com.meizu.genbatis.gen.GenerateService;
 import com.meizu.genbatis.gen.GenerateSql;
 import com.meizu.genbatis.model.AutoBeanModel;
 import com.meizu.genbatis.model.ConfigBean;
@@ -34,6 +37,15 @@ public class ParseCreateSql {
 
     @Autowired
     private GenerateSql generateSql;
+
+    @Autowired
+    private GenerateDao generateDao;
+
+    @Autowired
+    private GenerateService generateService;
+
+    @Autowired
+    private GenerateController generateController;
 
 //    @Value("${whereClause}")
 //    private  String whereClause;
@@ -129,15 +141,53 @@ public class ParseCreateSql {
             throw new GenerateException(ErrorCode.ServerDs.UNKOWN.getValue(), "createUpdateBatch方法错误,请检查参数配置", "");
         }
         allColumn.add("\n");
+        try {
+            allColumn.addAll(generateSql.createInsertBatch(beanModel));
+        }catch(GenerateException g){
+            throw g;
+        }catch(Exception e){
+            throw new GenerateException(ErrorCode.ServerDs.UNKOWN.getValue(), "createInsertBatch方法错误,请检查参数配置", "");
+        }
+        allColumn.add("\n");
         StringBuilder sb =new StringBuilder();
         for(String s:allColumn){
             sb.append(s);
+        }
+
+        String dao;
+        try {
+            dao = generateDao.createDao(beanModel);
+        }catch(GenerateException g){
+            throw g;
+        }catch(Exception e){
+            throw new GenerateException(ErrorCode.ServerDs.UNKOWN.getValue(), "生成dao错误", "");
+        }
+
+        String service;
+        try {
+            service = generateService.createService(beanModel);
+        }catch(GenerateException g){
+            throw g;
+        }catch(Exception e){
+            throw new GenerateException(ErrorCode.ServerDs.UNKOWN.getValue(), "生成dao错误", "");
+        }
+
+        String controller;
+        try {
+            controller = generateController.createController(beanModel);
+        }catch(GenerateException g){
+            throw g;
+        }catch(Exception e){
+            throw new GenerateException(ErrorCode.ServerDs.UNKOWN.getValue(), "生成controller错误", "");
         }
 
         sqlResultModel.setAutoBeanModel(beanModel);
         sqlResultModel.setModel((String)resultMap.get("model"));
         sqlResultModel.setParam((String)resultMap.get("param"));
         sqlResultModel.setSql(sb.toString());
+        sqlResultModel.setService(service);
+        sqlResultModel.setDao(dao);
+        sqlResultModel.setController(controller);
         //todo 加注释
         //todo 加Set
         //// TODO: 2016/12/2 update的时候 where条件不需要含有状态的

@@ -8,6 +8,34 @@ public class SqlResultModel {
     private String model;
     private String param;
     private String sql;
+    private String dao;
+    private String controller;
+
+    public String getController() {
+        return controller;
+    }
+
+    public void setController( String controller ) {
+        this.controller = controller;
+    }
+
+    public String getService() {
+        return service;
+    }
+
+    public void setService( String service ) {
+        this.service = service;
+    }
+
+    private String service;
+
+    public String getDao() {
+        return dao;
+    }
+
+    public void setDao( String dao ) {
+        this.dao = dao;
+    }
 
     private AutoBeanModel autoBeanModel;
 
