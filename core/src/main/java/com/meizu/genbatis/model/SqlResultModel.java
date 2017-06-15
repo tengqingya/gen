@@ -9,6 +9,15 @@ public class SqlResultModel {
     private String param;
     private String sql;
     private String dao;
+    private String controller;
+
+    public String getController() {
+        return controller;
+    }
+
+    public void setController( String controller ) {
+        this.controller = controller;
+    }
 
     public String getService() {
         return service;

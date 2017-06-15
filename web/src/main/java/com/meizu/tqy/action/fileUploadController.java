@@ -72,14 +72,16 @@ public class fileUploadController {
 		paths.put("modelPath",filePathPrefix+autoBeanModel.getModelName()+".java");
 		paths.put("paramPath",filePathPrefix+autoBeanModel.getModelName().replace("Model","Param")+".java");
 		paths.put("sqlPath",filePathPrefix+autoBeanModel.getModelName()+"sql.xml");
-		paths.put("daoPath",filePathPrefix+autoBeanModel.getModelName()+"Dao.java");
-		paths.put("servicePath",filePathPrefix+autoBeanModel.getModelName()+"Service.java");
+		paths.put("daoPath",filePathPrefix+autoBeanModel.getModelName().replace("Model","")+"Dao.java");
+		paths.put("servicePath",filePathPrefix+autoBeanModel.getModelName().replace("Model","")+"Service.java");
+		paths.put("controllerPath",filePathPrefix+autoBeanModel.getModelName().replace("Model","")+"Controller.java");
 		try {
 			FileUtils.writeStringToFile(new File(paths.get("modelPath")),sqlResultModel.getModel());
 			FileUtils.writeStringToFile(new File(paths.get("paramPath")),sqlResultModel.getParam());
 			FileUtils.writeStringToFile(new File(paths.get("sqlPath")),sqlResultModel.getSql());
 			FileUtils.writeStringToFile(new File(paths.get("daoPath")),sqlResultModel.getDao());
 			FileUtils.writeStringToFile(new File(paths.get("servicePath")),sqlResultModel.getService());
+			FileUtils.writeStringToFile(new File(paths.get("controllerPath")),sqlResultModel.getController());
 		} catch( IOException e ) {
 			throw new GenerateException(ErrorCode.ServerDs.UNKOWN.getValue(), "生成临时文件错误", "");
 		}

@@ -20,6 +20,7 @@ var fileUpload = {
 			$("#download3").attr("disabled", "disabled");
 			$("#download4").attr("disabled", "disabled");
 			$("#download5").attr("disabled", "disabled");
+			$("#download6").attr("disabled", "disabled");
 			if(filePaths&&filePaths.modelPath){
 				$.ajax({
 					url : '/manage/delete?path=' + filePaths.modelPath
@@ -67,6 +68,7 @@ var fileUpload = {
 						$("#download3").attr("disabled", "disabled");
 						$("#download4").attr("disabled", "disabled");
 						$("#download5").attr("disabled", "disabled");
+						$("#download6").attr("disabled", "disabled");
 						$("#beginSearch").attr("disabled", "disabled");
 					}
 					else{
@@ -89,6 +91,7 @@ var fileUpload = {
 							$("#download3").attr("disabled", "disabled");
 							$("#download4").attr("disabled", "disabled");
 							$("#download5").attr("disabled", "disabled");
+							$("#download6").attr("disabled", "disabled");
 							$("#batchSearch").attr("disabled", "disabled");
 							$("#beginSearch").attr("disabled", "disabled");
 							data.submit();
@@ -103,6 +106,7 @@ var fileUpload = {
 						$("#download3").removeAttr("disabled");
 						$("#download4").removeAttr("disabled");
 						$("#download5").removeAttr("disabled");
+						$("#download6").removeAttr("disabled");
 						filePaths = data.result.value;
 
 						$('#progress .bar').text("生成完成");
@@ -182,6 +186,13 @@ var fileUpload = {
 					window
 						.open("/manage/download?path="
 							+ filePaths.servicePath+"&filePathPrefix="+$('input[name="pathPrefix"]').val());
+				});
+		$("#download6")
+			.click(
+				function() {
+					window
+						.open("/manage/download?path="
+							+ filePaths.controllerPath+"&filePathPrefix="+$('input[name="pathPrefix"]').val());
 				});
 
 		$(window).bind("beforeunload", function() {
