@@ -8,6 +8,15 @@ public class SqlResultModel {
     private String model;
     private String param;
     private String sql;
+    private String dao;
+
+    public String getDao() {
+        return dao;
+    }
+
+    public void setDao( String dao ) {
+        this.dao = dao;
+    }
 
     private AutoBeanModel autoBeanModel;
 

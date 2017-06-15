@@ -72,10 +72,12 @@ public class fileUploadController {
 		paths.put("modelPath",filePathPrefix+autoBeanModel.getModelName()+".java");
 		paths.put("paramPath",filePathPrefix+autoBeanModel.getModelName().replace("Model","Param")+".java");
 		paths.put("sqlPath",filePathPrefix+autoBeanModel.getModelName()+"sql.xml");
+		paths.put("daoPath",filePathPrefix+autoBeanModel.getModelName()+"Dao.java");
 		try {
 			FileUtils.writeStringToFile(new File(paths.get("modelPath")),sqlResultModel.getModel());
 			FileUtils.writeStringToFile(new File(paths.get("paramPath")),sqlResultModel.getParam());
 			FileUtils.writeStringToFile(new File(paths.get("sqlPath")),sqlResultModel.getSql());
+			FileUtils.writeStringToFile(new File(paths.get("daoPath")),sqlResultModel.getDao());
 		} catch( IOException e ) {
 			throw new GenerateException(ErrorCode.ServerDs.UNKOWN.getValue(), "生成临时文件错误", "");
 		}
