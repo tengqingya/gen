@@ -55,6 +55,37 @@ public class GenerateSql {
         return retList;
     }
 
+    public Collection<? extends String> createInsertBatch( AutoBeanModel beanModel ) {
+        validBeabModel(beanModel);
+
+        List<String> retList = new ArrayList<>();
+        List<String> fieldTable = beanModel.getFieldTable();
+        List<String> fieldName = beanModel.getFieldName();
+
+        retList.add(ONE_TAB+ "<insert id=\"insert"+ beanModel.getModelName().replace("Model","")+"Batch" +"\">\n");
+        retList.add(TWO_TAB+"INSERT INTO "+beanModel.getTableName()+"\n");
+        retList.add(TWO_TAB+"(\n");
+
+        for(int i=0;i<fieldName.size()-1;i++){
+            retList.add(String.format(THREE_TAB+"%s, \n",fieldTable.get(i)));
+        }
+        retList.add(String.format(THREE_TAB+"%s\n",fieldTable.get(fieldName.size()-1)));
+        retList.add(TWO_TAB+")\n");
+
+        retList.add(TWO_TAB+"VALUES\n");
+
+        retList.add(TWO_TAB+String.format("<foreach collection=\"list\" separator=\",\" item=\"item\">\n"));
+
+        retList.add(THREE_TAB+"<trim prefix=\"(\" suffix=\")\" suffixOverrides=\",\">\n");
+        for(int i=0;i<fieldName.size();i++){
+            retList.add(String.format(FOUR_TAB+"<if test=\"item.%s != null\"> #{%s}, </if>\n",fieldName.get(i),fieldName.get(i)));
+        }
+        retList.add(THREE_TAB+"</trim>\n");
+        retList.add(TWO_TAB+"</foreach>\n");
+        retList.add(ONE_TAB+"</insert>\n");
+        return retList;
+    }
+
     private void validBeabModel( AutoBeanModel beanModel ) {
         List<String> fieldTable = beanModel.getFieldTable();
         List<String> fieldName = beanModel.getFieldName();
@@ -310,4 +341,5 @@ public class GenerateSql {
 
         return retList;
     }
+
 }

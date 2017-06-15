@@ -129,6 +129,14 @@ public class ParseCreateSql {
             throw new GenerateException(ErrorCode.ServerDs.UNKOWN.getValue(), "createUpdateBatch方法错误,请检查参数配置", "");
         }
         allColumn.add("\n");
+        try {
+            allColumn.addAll(generateSql.createInsertBatch(beanModel));
+        }catch(GenerateException g){
+            throw g;
+        }catch(Exception e){
+            throw new GenerateException(ErrorCode.ServerDs.UNKOWN.getValue(), "createInsertBatch方法错误,请检查参数配置", "");
+        }
+        allColumn.add("\n");
         StringBuilder sb =new StringBuilder();
         for(String s:allColumn){
             sb.append(s);
