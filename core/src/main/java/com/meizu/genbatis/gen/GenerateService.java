@@ -43,7 +43,7 @@ public class GenerateService {
         retList.add(ONE_TAB+"}\n\n");
 
         retList.add(ONE_TAB+ String.format("public int count%ss(%sParam %sParam){\n",className,className,classNameWithLowerCase));
-        retList.add(TWO_TAB+String.format("return %sDao.count%ss(%sParam);\n",classNameWithLowerCase,classNameWithLowerCase,className));
+        retList.add(TWO_TAB+String.format("return %sDao.count%ss(%sParam);\n",classNameWithLowerCase,className,classNameWithLowerCase));
         retList.add(ONE_TAB+"}\n\n");
 
         retList.add(ONE_TAB+String.format("public List<%sModel> select%ss(%sParam %sParam){\n",className,className,className,classNameWithLowerCase));
