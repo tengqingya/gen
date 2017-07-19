@@ -35,7 +35,7 @@ public class GenerateDao {
         retList.add(ONE_TAB+String.format("int count%ss(@Param(\"%s\") %sParam %sParam);\n\n",className, slectPrefix,className,classNameWithLowerCase));
         retList.add(ONE_TAB+String.format("List<%sModel> select%ss(@Param(\"%s\") %sParam %sParam);\n\n",className,className,slectPrefix,className,classNameWithLowerCase));
         retList.add(ONE_TAB+String.format("int update%s(@Param(\"%s\") %sParam %sParam);\n\n",className,updatePrefix,className,classNameWithLowerCase));
-        retList.add(ONE_TAB+String.format("int update%sBatch(@Param(\"%s\") %sParam %sParam);\n\n",className,updatePrefix,className,classNameWithLowerCase));
+        retList.add(ONE_TAB+String.format("int update%sBatch(@Param(\"%s\") List<%sParam> %sParam);\n\n",className,updatePrefix,className,classNameWithLowerCase));
         retList.add("}\n");
 
         StringBuilder sb =new StringBuilder();
