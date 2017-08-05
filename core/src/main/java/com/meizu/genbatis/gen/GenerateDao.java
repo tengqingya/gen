@@ -30,8 +30,8 @@ public class GenerateDao {
         String classNameWithLowerCase = className.substring(0, 1).toLowerCase() + className.substring(1);
         retList.add( "@Repository\n");
         retList.add(String.format("public interface %sDao {\n\n", className));
-        retList.add(ONE_TAB+String.format("int insert%s(%sModel %sModel);\n\n",className,className,classNameWithLowerCase));
-        retList.add(ONE_TAB+String.format("int insert%sBatch(List<%sModel> %sModel);\n\n",className,className,classNameWithLowerCase));
+        retList.add(ONE_TAB+String.format("int insert%s(@Param(\"%sModel\")%sModel %sModel);\n\n",className,classNameWithLowerCase,className,classNameWithLowerCase));
+        retList.add(ONE_TAB+String.format("int insert%sBatch(@Param(\"%sModel\")List<%sModel> %sModel);\n\n",className,classNameWithLowerCase,className,classNameWithLowerCase));
         retList.add(ONE_TAB+String.format("int count%ss(@Param(\"%s\") %sParam %sParam);\n\n",className, slectPrefix,className,classNameWithLowerCase));
         retList.add(ONE_TAB+String.format("List<%sModel> select%ss(@Param(\"%s\") %sParam %sParam);\n\n",className,className,slectPrefix,className,classNameWithLowerCase));
         retList.add(ONE_TAB+String.format("int update%s(@Param(\"%s\") %sParam %sParam);\n\n",className,updatePrefix,className,classNameWithLowerCase));

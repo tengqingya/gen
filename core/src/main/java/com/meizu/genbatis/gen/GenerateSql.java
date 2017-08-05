@@ -41,17 +41,35 @@ public class GenerateSql {
         retList.add(TWO_TAB+"INSERT INTO "+beanModel.getTableName()+"\n");
         retList.add(TWO_TAB+"<trim prefix=\"(\" suffix=\")\" suffixOverrides=\",\">\n");
 
+        String s = beanModel.getModelName().substring(0, 1).toLowerCase() + beanModel.getModelName().substring(1);
         for(int i=0;i<fieldName.size();i++){
-            retList.add(String.format(THREE_TAB+"<if test=\"%s != null\"> %s, </if>\n",fieldName.get(i),fieldTable.get(i)));
+            retList.add(String.format(THREE_TAB+"<if test=\"%s.%s != null\"> %s, </if>\n", s,fieldName.get(i),fieldTable.get(i)));
         }
         retList.add(TWO_TAB+"</trim>\n");
         retList.add(TWO_TAB+"VALUES\n");
         retList.add(TWO_TAB+"<trim prefix=\"(\" suffix=\")\" suffixOverrides=\",\">\n");
         for(int i=0;i<fieldName.size();i++){
-            retList.add(String.format(THREE_TAB+"<if test=\"%s != null\"> #{%s}, </if>\n",fieldName.get(i),fieldName.get(i)));
+            retList.add(String.format(THREE_TAB+"<if test=\"%s.%s != null\"> #{%s.%s}, </if>\n",s,fieldName.get(i),s,fieldName.get(i)));
         }
         retList.add(TWO_TAB+"</trim>\n");
         retList.add(ONE_TAB+"</insert>\n");
+
+        /**...............................................................................................**/
+
+        retList.add(ONE_TAB+ "<insert id=\"insert"+ beanModel.getModelName().replace("Model","") +"\">\n");
+        retList.add(TWO_TAB+"INSERT INTO "+beanModel.getTableName()+"(\n");
+
+        for(int i=0;i<fieldName.size();i++){
+            retList.add(String.format(THREE_TAB+"%s,\n", fieldTable.get(i)));
+        }
+        retList.add(TWO_TAB+")\n");
+        retList.add(TWO_TAB+"VALUES(\n");
+        for(int i=0;i<fieldName.size();i++){
+            retList.add(String.format(THREE_TAB+"#{%s.%s},\n",s,fieldName.get(i)));
+        }
+        retList.add(TWO_TAB+")\n");
+        retList.add(ONE_TAB+"</insert>\n");
+
         return retList;
     }
 
@@ -65,7 +83,6 @@ public class GenerateSql {
         retList.add(ONE_TAB+ "<insert id=\"insert"+ beanModel.getModelName().replace("Model","")+"Batch" +"\">\n");
         retList.add(TWO_TAB+"INSERT INTO "+beanModel.getTableName()+"\n");
         retList.add(TWO_TAB+"(\n");
-
         for(int i=0;i<fieldName.size()-1;i++){
             retList.add(String.format(THREE_TAB+"%s, \n",fieldTable.get(i)));
         }
