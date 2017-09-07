@@ -68,6 +68,7 @@ public class GenerateSql {
             retList.add(String.format(THREE_TAB+"#{%s.%s},\n",s,fieldName.get(i)));
         }
         retList.add(TWO_TAB+")\n");
+        retList.add(TWO_TAB+"ON DUPLICATE KEY UPDATE FID=VALUES(FID)\n");
         retList.add(ONE_TAB+"</insert>\n");
 
         return retList;
